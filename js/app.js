@@ -209,13 +209,29 @@ const game = {
 
 
 	start(){																		//<-- you're looking for this
-
+		
 		this.player.draw();
 		this.factory.generateEnemy();
 		this.timer();																	
 		this.animate();	
 
 	},
+
+/***********************************************************************************
+ok so, so far everything has been pretty game-wid in scope. what I now am going to 
+attempt to set up is the indivdual mini-game methods, which will reskin the master
+game and slightly change the rules. 
+
+along the way, I'll probably have to add more stuff the universal scope - that's
+both cool and good. I could start with that, but I think I need to start building
+a mini-grame so that I know what I actually need to add to the game-wide scope.
+
+this will probably happen in a branch, so watch out! 
+***********************************************************************************/
+
+
+
+
 
 };
 
