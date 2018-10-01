@@ -81,7 +81,7 @@ const game = {
 		enemies: [],
 		generateEnemy(){
 			let pitchSpeed = Math.floor((Math.random() * 5));
-			const newEnemy = new Square(900, 280, 20, 20, 'black', pitchSpeed);
+			const newEnemy = new Square(1000, 280, 20, 20, 'black', pitchSpeed); 	//should generate at right edge of screen
 			newEnemy.draw();
 			this.enemies.push(newEnemy);
 			return newEnemy;
@@ -96,6 +96,14 @@ const game = {
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
 			console.log(this.counter);
+			
+			//now we instantiate a new enemy every 5 seconds
+
+			if ((this.counter % 5) === 0 ) {
+				this.factory.enemies.pop();
+				this.factory.generateEnemy();
+			}
+
 		}, 1000)
 	}
 };
@@ -117,7 +125,7 @@ let counter = 0
 function animate() {
 
 	counter++;
-	console.log(counter);
+	// console.log(counter);
 	game.factory.enemies[0].x -= game.factory.enemies[0].speed; 
 	clearCanvas();
 	game.factory.enemies[0].draw();
