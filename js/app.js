@@ -33,36 +33,51 @@ const ctx = canvas.getContext('2d');
 
 class Square {
 	constructor(x, y, h, w, color, speed){
+
 		this.x = x;
 		this.y = y;
 		this.height = h;
 		this.width = w;
 		this.color = color;
 		this.speed = speed;
+		this.status = true;
+
 	} 
 	draw(){
-		ctx.beginPath();
-		ctx.rect(this.x, this.y, this.width, this.height);
-		ctx.fillStyle = this.color;
-		ctx.fill();
-		ctx.closePath();
+		
+		if (this.status === true){
+			ctx.beginPath();
+			ctx.rect(this.x, this.y, this.width, this.height);
+			ctx.fillStyle = this.color;
+			ctx.fill();
+			ctx.closePath();
+		} else {
+			ctx.beginPath();
+			ctx.rect(this.x, this.y, this.width, this.height);
+			ctx.closePath();
+		}
+		
 	}
 };
 
 class Circle {
 	constructor(x, y, r, color, speed){
+
 		this.x = x;
 		this.y = y;
 		this.r = r;
 		this.color = color;
 		this.speed = speed;															//<-- not sure Circle needs speed yet, but jic
+	
 	}
 	draw(){
+
 		ctx.beginPath
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
 		ctx.fillStyle = this.color;
 		ctx.fill();
 		ctx.closePath();}
+
 };
 
 
@@ -85,19 +100,24 @@ const game = {
 	factory: {
 		enemies: [],
 		generateEnemy(){
+
 			let pitchSpeed = Math.floor((Math.random() * 5)+ 2);					//generate's pitch speed (I guess we're in baseball mode rn)
 			const newEnemy = new Square(1000, 280, 10, 10, 'black', pitchSpeed); 	//should generate at right edge of screen
 			newEnemy.draw();
 			this.enemies.push(newEnemy);
 			return newEnemy;
+
 		}
 	},
 
 	// timer = setInterval, etc. 
 
 	counter: 0, 
+
 	intervalID: null,
+
 	timer(){
+
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
 			console.log(this.counter);
@@ -110,6 +130,7 @@ const game = {
 			}
 
 		}, 1000)
+
 	}
 };
 
@@ -125,10 +146,12 @@ const game = {
 function collisionDetection(){
 
 	let currentEnemy = game.factory.enemies[0];
-	let player = game.player
-
+	let player = game.player;
 	if (currentEnemy.x < (player.x + player.r) && currentEnemy.x > (player.x - player.r) && currentEnemy.y < (player.y + player.r) && currentEnemy.y > (player.y - player.r)) {
-		console.log('hit!')
+		
+		console.log('hit!');
+		currentEnemy.status = false;
+		console.log(currentEnemy.status);
 
 	}
 };
@@ -137,13 +160,16 @@ function collisionDetection(){
 // enemy animation / dummy physics
 
 function clearCanvas(){
-		ctx.clearRect(0, 0, canvas.width, canvas.height)
+		
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
 }; 
 
 
 //animate function
 
 let counter = 0;
+
 function animate() {
 
 	let currentEnemy = game.factory.enemies[0];
@@ -154,8 +180,8 @@ function animate() {
 	currentEnemy.draw();
 	game.player.draw();
 	collisionDetection();
-
 	window.requestAnimationFrame(animate);
+
 };
 
 
@@ -166,8 +192,8 @@ function animate() {
 
 game.player.draw();
 game.factory.generateEnemy();
-// game.timer();																	//<--switch timer on/off (test phase)
-// animate();																		//<--switch animate on/off (test phase)
+game.timer();																	//<--switch timer on/off (test phase)
+animate();																		//<--switch animate on/off (test phase)
 
 
 
