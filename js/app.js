@@ -21,13 +21,15 @@ ok let's pseudo!
 
 set up canvas/context
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
 
 then we're going to create a class square for our enemies 
 (possibly a class circle for our hero, TBD)
+************************************************************/
 
-Class square = {
+const canvas = document.getElementById('my-canvas');
+const ctx = canvas.getContext('2d');
+
+class Square {
 	constructor(x, y, h, w, color, speed){
 		this.x = x;
 		this.y = y;
@@ -45,7 +47,7 @@ Class square = {
 	}
 }
 
-Class circle = {
+class Circle {
 	constructor(x, y, r, color, speed){
 		this.x = x;
 		this.y = y;
@@ -54,6 +56,7 @@ Class circle = {
 		this.speed = speed;
 	}
 	draw(){
+		ctx.beginPath
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
 		ctx.fillStyle = this.color;
 		ctx.fill();
@@ -61,22 +64,44 @@ Class circle = {
 }
 
 
-game object to contain everything
+// game object to contain everything
 
 const game = {
 
-	factory to make enemy squares(){},
 
-	player = new Circle(),
+	//player  = new circle()
 
-	timer = setInterval, etc. 
+	player: new Circle(490, 290, 10, 'brown', 10),
+	
+	// factory to make enemy squares(){},
+
+	factory: {
+		enemies: [],
+		generateEnemy(){
+			let pitchSpeed = Math.floor((Math.random() * 5) + 3);
+			const newEnemy = new Square(900, 280, 20, 20, 'black', pitchSpeed);
+			newEnemy.draw();
+			this.enemies.push(newEnemy);
+			return newEnemy;
+		}
+	},
+
+	// timer = setInterval, etc. 
+
 
 	
-	
-}
+};
+
+game.player.draw();
+game.factory.generateEnemy();
+
+/************************************************************
+
 
 
 ************************************************************/
+
+
 
 /************************************************************
 
@@ -117,8 +142,13 @@ mini-game outlines:
 	prolonging it
 	-STRETCH: honestly this whole game is a stretch goal
 
-HERE'S MY COLLISION DETECTION CODE FROM THE PRACTICE
-(might be a helpful reference)
+
+*************************************************************
+
+
+	HERE'S MY COLLISION DETECTION CODE FROM THE PRACTICE
+
+				(might be a helpful reference)
 
 
 const canvas = document.getElementById('my-canvas');
