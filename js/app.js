@@ -19,6 +19,62 @@ basic user stories/goals for today:
 
 ok let's pseudo!
 
+set up canvas/context
+
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+
+then we're going to create a class square for our enemies 
+(possibly a class circle for our hero, TBD)
+
+Class square = {
+	constructor(x, y, h, w, color, speed){
+		this.x = x;
+		this.y = y;
+		this.height = h;
+		this.width = w;
+		this.color = color;
+		this.speed = speed;
+	} 
+	draw(){
+		ctx.beginPath();
+		ctx.rect(this.x, this.y, this.width, this.height);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath();
+	}
+}
+
+Class circle = {
+	constructor(x, y, r, color, speed){
+		this.x = x;
+		this.y = y;
+		this.r = r;
+		this.color = color;
+		this.speed = speed;
+	}
+	draw(){
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath();}
+}
+
+
+game object to contain everything
+
+const game = {
+
+	factory to make enemy squares(){},
+
+	player = new Circle(),
+
+	timer = setInterval, etc. 
+
+	
+	
+}
+
 
 ************************************************************/
 
