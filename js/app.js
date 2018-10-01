@@ -53,7 +53,6 @@ class Square {
 			ctx.closePath();
 		} else {
 			ctx.beginPath();
-			ctx.rect(this.x, this.y, this.width, this.height);
 			ctx.closePath();
 		}
 		
@@ -62,7 +61,7 @@ class Square {
 
 class Circle {
 	constructor(x, y, r, color, speed){
-
+// 
 		this.x = x;
 		this.y = y;
 		this.r = r;
@@ -79,6 +78,19 @@ class Circle {
 		ctx.closePath();}
 
 };
+
+
+
+/************************************************************
+					  BUTTONS & INPUTS 
+************************************************************/
+
+const $start = $('#start')
+
+$start.on('click', ()=> {
+	// game.start();
+	console.log('start the party')
+});
 
 
 /************************************************************
@@ -192,8 +204,8 @@ function animate() {
 
 game.player.draw();
 game.factory.generateEnemy();
-game.timer();																	//<--switch timer on/off (test phase)
-animate();																		//<--switch animate on/off (test phase)
+// game.timer();																	//<--switch timer on/off (test phase)
+// animate();																		//<--switch animate on/off (test phase)
 
 
 
