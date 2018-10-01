@@ -17,6 +17,8 @@ basic user stories/goals for today:
 
 						PSEUDO
 
+ok let's pseudo!
+
 
 ************************************************************/
 
@@ -39,11 +41,28 @@ basic gameplay:
 mini-game outlines: 
 	-GAME 1: home run derby: 
 	the player controls a batter, and by completing the 
-	assigned phrase moves his bat into the path of 
+	assigned phrases moves his bat into the path of 
 	an oncomming fastball - get there in time
 	and you hit a home run!
-	-STRETCH: 
+	-STRETCH: variable pitch speeds, home run vs single
+	sweet spots
+	-GAME 2: space invader: 
+	this player controls a spaceship, and by completing
+	the assigned phrases charges and fires its laser
+	to repel oncoming enemies
+	-STRETCH: the player ship will bob up and down
+	so that the phrase must typed at exactly the right
+	time to hit each oponent
+	-GAME 3: Dodge/catch: 
+	the player controls a character who moves back
+	and forth on the x axis as phrases are typed, 
+	dodging knives and catching fruit. Knives lower
+	health, shortening the game, fruit increases, 
+	prolonging it
+	-STRETCH: honestly this whole game is a stretch goal
 
+HERE'S MY COLLISION DETECTION CODE FROM THE PRACTICE
+(might be a helpful reference)
 
 
 const canvas = document.getElementById('my-canvas');
