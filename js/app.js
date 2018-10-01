@@ -1,4 +1,3 @@
-console.log('game time');
 
 /************************************************************
 
@@ -10,10 +9,6 @@ basic user stories/goals for today:
 	-simplest possible working model of one game
 	-games 2 & are a plus
 
-************************************************************/
-
-
-/************************************************************
 
 						PSEUDO
 
@@ -25,6 +20,13 @@ set up canvas/context
 then we're going to create a class square for our enemies 
 (possibly a class circle for our hero, TBD)
 ************************************************************/
+
+console.log('game time');
+
+/************************************************************
+					CLASSES & CONSTS
+************************************************************/
+
 
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext('2d');
@@ -64,6 +66,9 @@ class Circle {
 };
 
 
+/************************************************************
+						GAME OBJECT
+************************************************************/
 
 
 // game object to contain everything
@@ -109,11 +114,9 @@ const game = {
 };
 
 
-
-game.player.draw();
-game.factory.generateEnemy();
-// game.timer();																	//<--switch timer on/off (test phase)
-
+/************************************************************
+					ANIMATION JUNK
+************************************************************/
 
 
 //colission detection & stoppage here: 
@@ -158,6 +161,15 @@ function animate() {
 	window.requestAnimationFrame(animate);
 };
 
+
+/************************************************************
+						CALL ZONE
+************************************************************/
+
+
+game.player.draw();
+game.factory.generateEnemy();
+// game.timer();																	//<--switch timer on/off (test phase)
 // animate();																		//<--switch animate on/off (test phase)
 
 
