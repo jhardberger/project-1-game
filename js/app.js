@@ -88,7 +88,7 @@ class Circle {
 const $start = $('#start')
 
 $start.on('click', ()=> {
-	// game.start();
+	game.start();
 	console.log('start the party')
 });
 
@@ -143,6 +143,15 @@ const game = {
 
 		}, 1000)
 
+	},
+
+	start(){
+
+		game.player.draw();
+		game.factory.generateEnemy();
+		game.timer();																	
+		animate();	
+
 	}
 };
 
@@ -195,18 +204,7 @@ function animate() {
 	window.requestAnimationFrame(animate);
 
 };
-
-
-/************************************************************
-						CALL ZONE
-************************************************************/
-
-
-game.player.draw();
-game.factory.generateEnemy();
-// game.timer();																	//<--switch timer on/off (test phase)
-// animate();																		//<--switch animate on/off (test phase)
-
+															
 
 
 /************************************************************
