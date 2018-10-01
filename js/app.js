@@ -45,7 +45,7 @@ class Square {
 		ctx.fill();
 		ctx.closePath();
 	}
-}
+};
 
 class Circle {
 	constructor(x, y, r, color, speed){
@@ -53,7 +53,7 @@ class Circle {
 		this.y = y;
 		this.r = r;
 		this.color = color;
-		this.speed = speed;
+		this.speed = speed;															//<-- not sure Circle needs speed yet, but jic
 	}
 	draw(){
 		ctx.beginPath
@@ -61,7 +61,7 @@ class Circle {
 		ctx.fillStyle = this.color;
 		ctx.fill();
 		ctx.closePath();}
-}
+};
 
 
 
@@ -73,15 +73,15 @@ const game = {
 
 	//player  = new circle()
 
-	player: new Circle(490, 290, 10, 'brown', 10),
+	player: new Circle(490, 290, 20, 'brown', 10),
 	
 	// factory to make enemy squares(){},
 
 	factory: {
 		enemies: [],
 		generateEnemy(){
-			let pitchSpeed = Math.floor((Math.random() * 5));
-			const newEnemy = new Square(1000, 280, 20, 20, 'black', pitchSpeed); 	//should generate at right edge of screen
+			let pitchSpeed = Math.floor((Math.random() * 5)+ 2);					//generate's pitch speed (I guess we're in baseball mode rn)
+			const newEnemy = new Square(1000, 280, 10, 10, 'black', pitchSpeed); 	//should generate at right edge of screen
 			newEnemy.draw();
 			this.enemies.push(newEnemy);
 			return newEnemy;
@@ -99,7 +99,7 @@ const game = {
 			
 			//now we instantiate a new enemy every 5 seconds
 
-			if ((this.counter % 5) === 0 ) {
+			if ((this.counter % 6) === 0 ) {
 				this.factory.enemies.pop();
 				this.factory.generateEnemy();
 			}
@@ -112,7 +112,26 @@ const game = {
 
 game.player.draw();
 game.factory.generateEnemy();
-// game.timer();
+// game.timer();																	//<--switch timer on/off (test phase)
+
+
+
+//colission detection & stoppage here: 
+
+
+function collisionDetection(){
+
+
+	for(let i = 0; i < canvas.width; i++) {
+
+		let currentEnemy = game.factory.enemies[0];
+		let player = game.player
+
+		if (currentEnemy.x < (player.x + player.r) && currentEnemy.x > (player.x - player.r) && currentEnemy.y < (player.y + player.r) && currentEnemy.y > (player.y - player.r)) {
+			console.log('hit!')
+		}
+	}
+};
 
 
 // enemy animation / dummy physics
@@ -121,28 +140,25 @@ function clearCanvas(){
 		ctx.clearRect(0, 0, canvas.width, canvas.height)
 }; 
 
-let counter = 0
+
+//animate function
+
+let counter = 0;
 function animate() {
 
+	let currentEnemy = game.factory.enemies[0];
 	counter++;
 	// console.log(counter);
-	game.factory.enemies[0].x -= game.factory.enemies[0].speed; 
+	currentEnemy.x -= currentEnemy.speed; 
 	clearCanvas();
-	game.factory.enemies[0].draw();
+	currentEnemy.draw();
 	game.player.draw();
+	collisionDetection();
 
-	//call this at the end: 
 	window.requestAnimationFrame(animate);
 };
 
-// animate();
-
-
-/************************************************************
-
-
-
-************************************************************/
+// animate();																		//<--switch animate on/off (test phase)
 
 
 
