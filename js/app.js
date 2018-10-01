@@ -64,6 +64,8 @@ class Circle {
 }
 
 
+
+
 // game object to contain everything
 
 const game = {
@@ -78,7 +80,7 @@ const game = {
 	factory: {
 		enemies: [],
 		generateEnemy(){
-			let pitchSpeed = Math.floor((Math.random() * 5) + 3);
+			let pitchSpeed = Math.floor((Math.random() * 5));
 			const newEnemy = new Square(900, 280, 20, 20, 'black', pitchSpeed);
 			newEnemy.draw();
 			this.enemies.push(newEnemy);
@@ -96,14 +98,37 @@ const game = {
 			console.log(this.counter);
 		}, 1000)
 	}
-
-
-	
 };
+
+
 
 game.player.draw();
 game.factory.generateEnemy();
 // game.timer();
+
+
+// enemy animation / dummy physics
+
+function clearCanvas(){
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
+}; 
+
+let counter = 0
+function animate() {
+
+	counter++;
+	console.log(counter);
+	game.factory.enemies[0].x -= game.factory.enemies[0].speed; 
+	clearCanvas();
+	game.factory.enemies[0].draw();
+	game.player.draw();
+
+	//call this at the end: 
+	window.requestAnimationFrame(animate);
+};
+
+// animate();
+
 
 /************************************************************
 
@@ -167,44 +192,9 @@ const ctx = canvas.getContext('2d');
 // the "context" is what you actually draw on 
 // -- you basically always need this
 
-function makeX(){
 
-	ctx.beginPath();
-	//this is telling canvas we're about to draw a line
-	ctx.moveTo(100, 100)
-	//this is the start of the line
-	ctx.lineTo(300, 300)
-	//this is the end point
-	ctx.stroke();
-	//this issues the command to draw the line
-	ctx.closePath();
-	//this says we're all done
+//RECTANGLES REF****************************************************
 
-	ctx.beginPath();
-	ctx.moveTo(100, 300)
-	ctx.lineTo(300, 100)
-	ctx.stroke();
-	ctx.closePath();
-
-};
-
-function drawGrid(){
-	for (let i = 0; i < canvas.height; i += 50) {
-			ctx.beginPath();
-			ctx.moveTo(i, 0)
-			ctx.lineTo(i, canvas.height)
-			ctx.stroke();
-			ctx.beginPath();
-			ctx.moveTo(0, i)
-			ctx.lineTo(canvas.width, i)
-			ctx.stroke();			
-	}; ctx.closePath();
-};
-
-drawGrid();
-
-function drawRect(){
-	ctx.beginPath();
 
 	//this is the method for rectangles of any size
 	//4 parameters:
@@ -215,7 +205,8 @@ function drawRect(){
 
 	ctx.rect(300, 300, 80, 180);
 	ctx.fillStyle = "firebrick";
-	//^ this is not a method but a property of the ctx object, which is built in cool
+	//^ this is not a method but a property of the ctx object,
+	//^ which is built in cool
 	ctx.fill();
 	//^this is the method that calls fillstyle
 	//often for shapes we use fill instead of stroke.
@@ -239,7 +230,9 @@ const captSquare = {
 
 };
 
-//circles
+
+//CIRCLES REF****************************************************
+
 
 function circules(){
 	ctx.beginPath();
@@ -279,7 +272,8 @@ const cmndCircle = {
 
 };
 
-cmndCircle.drawHerself();
+
+//CONTROL REF****************************************************
 
 
 //two common ways to MOVE STUFF around
@@ -339,6 +333,10 @@ const admiralRect = {
 };
 
 admiralRect.drawHisself();
+
+
+//ANIMATION REF****************************************************
+
 
 //admiralRect should move down automatically via animation
 
