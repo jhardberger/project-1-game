@@ -88,12 +88,22 @@ const game = {
 
 	// timer = setInterval, etc. 
 
+	counter: 0, 
+	intervalID: null,
+	timer(){
+		this.intervalID = setInterval(()=>{ 
+			this.counter++;
+			console.log(this.counter);
+		}, 1000)
+	}
+
 
 	
 };
 
 game.player.draw();
 game.factory.generateEnemy();
+// game.timer();
 
 /************************************************************
 
