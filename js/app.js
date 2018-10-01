@@ -124,15 +124,12 @@ const game = {
 
 function collisionDetection(){
 
+	let currentEnemy = game.factory.enemies[0];
+	let player = game.player
 
-	for(let i = 0; i < canvas.width; i++) {
+	if (currentEnemy.x < (player.x + player.r) && currentEnemy.x > (player.x - player.r) && currentEnemy.y < (player.y + player.r) && currentEnemy.y > (player.y - player.r)) {
+		console.log('hit!')
 
-		let currentEnemy = game.factory.enemies[0];
-		let player = game.player
-
-		if (currentEnemy.x < (player.x + player.r) && currentEnemy.x > (player.x - player.r) && currentEnemy.y < (player.y + player.r) && currentEnemy.y > (player.y - player.r)) {
-			console.log('hit!')
-		}
 	}
 };
 
