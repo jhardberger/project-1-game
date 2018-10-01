@@ -52,7 +52,7 @@ class Square {
 			ctx.fill();
 			ctx.closePath();
 		} else {
-			ctx.beginPath();
+			ctx.beginPath();														//<-- I suspect there's a simpler solution than this, but this works
 			ctx.closePath();
 		}
 		
@@ -75,7 +75,8 @@ class Circle {
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
 		ctx.fillStyle = this.color;
 		ctx.fill();
-		ctx.closePath();}
+		ctx.closePath();
+	}
 
 };
 
@@ -85,13 +86,34 @@ class Circle {
 					  BUTTONS & INPUTS 
 ************************************************************/
 
-const $start = $('#start')
+const $start = $('#start');
+const $reset = $('#reset');
 
-$start.on('click', ()=> {
+//START BUTTON *********************************************
+
+
+$start.on('click', ()=>{
+
 	game.start();
+	$start.hide();
+	$reset.show();
 	console.log('start the party')
+	
 });
 
+//RESET BUTTON *********************************************
+
+
+$reset.on('click', ()=>{
+	$reset.hide();
+	$start.show();
+	clearInterval(game.intervalID);
+	game.counter = 0;
+	clearCanvas();
+
+	console.log('restart')
+
+});
 
 /************************************************************
 						GAME OBJECT
@@ -105,7 +127,7 @@ const game = {
 
 	//player  = new circle()
 
-	player: new Circle(490, 290, 20, 'brown', 10),
+	player: new Circle(490, 190, 20, 'brown', 10),
 	
 	// factory to make enemy squares(){},
 
@@ -114,7 +136,7 @@ const game = {
 		generateEnemy(){
 
 			let pitchSpeed = Math.floor((Math.random() * 5)+ 2);					//generate's pitch speed (I guess we're in baseball mode rn)
-			const newEnemy = new Square(1000, 280, 10, 10, 'black', pitchSpeed); 	//should generate at right edge of screen
+			const newEnemy = new Square(1000, 190, 10, 10, 'black', pitchSpeed); 	//should generate at right edge of screen
 			newEnemy.draw();
 			this.enemies.push(newEnemy);
 			return newEnemy;
@@ -152,7 +174,9 @@ const game = {
 		game.timer();																	
 		animate();	
 
-	}
+	},
+
+
 };
 
 
