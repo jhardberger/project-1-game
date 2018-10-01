@@ -46,4 +46,211 @@ mini-game outlines:
 
 
 
+const canvas = document.getElementById('my-canvas');
+// this is our canvas
+const ctx = canvas.getContext('2d');
+// the "context" is what you actually draw on 
+// -- you basically always need this
+
+function makeX(){
+
+	ctx.beginPath();
+	//this is telling canvas we're about to draw a line
+	ctx.moveTo(100, 100)
+	//this is the start of the line
+	ctx.lineTo(300, 300)
+	//this is the end point
+	ctx.stroke();
+	//this issues the command to draw the line
+	ctx.closePath();
+	//this says we're all done
+
+	ctx.beginPath();
+	ctx.moveTo(100, 300)
+	ctx.lineTo(300, 100)
+	ctx.stroke();
+	ctx.closePath();
+
+};
+
+function drawGrid(){
+	for (let i = 0; i < canvas.height; i += 50) {
+			ctx.beginPath();
+			ctx.moveTo(i, 0)
+			ctx.lineTo(i, canvas.height)
+			ctx.stroke();
+			ctx.beginPath();
+			ctx.moveTo(0, i)
+			ctx.lineTo(canvas.width, i)
+			ctx.stroke();			
+	}; ctx.closePath();
+};
+
+drawGrid();
+
+function drawRect(){
+	ctx.beginPath();
+
+	//this is the method for rectangles of any size
+	//4 parameters:
+	//1. x coord of UPPER LEFT HAND CORNER of rect
+	//2. Y coord of UPPER LEFT HAND CORNER of rect
+	//3. width of rect
+	//4. height of rect
+
+	ctx.rect(300, 300, 80, 180);
+	ctx.fillStyle = "firebrick";
+	//^ this is not a method but a property of the ctx object, which is built in cool
+	ctx.fill();
+	//^this is the method that calls fillstyle
+	//often for shapes we use fill instead of stroke.
+	//if u wanna fill them, anway whatever
+	ctx.closePath();
+};
+
+drawRect();
+
+const captSquare = {
+	height: 40,
+	width: 80,
+	color: 'teal',
+	drawHisself() {
+		ctx.beginPath();
+		ctx.rect(100, 100, this.width, this.height);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath( );
+	}
+
+};
+
+//circles
+
+function circules(){
+	ctx.beginPath();
+
+	//to draw a circle, u use arc
+	//params are a little different
+	// x: x coordinate of the center of the circle
+	// y: y coordinate of the cneter of the circle
+	// radius
+	// e: -- don't worry about what it is for now, just always set it to 0
+	// how much of the circle you want to actually draw in RADIANS
+	// note(2 pi radians is 370*)
+
+	ctx.arc(75, 525, 71, 0, Math.PI * 2);
+	ctx.fillStyle = 'yellow';
+	ctx.fill();
+	ctx.closePath();
+
+};
+
+circules();
+
+const cmndCircle = {
+	x: 400,
+	y: 400,
+	r: 66,
+	color: 'navy',
+	speed: 20,
+
+	drawHerself(){
+		ctx.beginPath();
+		ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath();
+	}
+
+};
+
+cmndCircle.drawHerself();
+
+
+//two common ways to MOVE STUFF around
+//which is what you wanna do right?
+
+$(document).on('keydown', (event)=>{ 
+	if (event.keyCode === 38) {
+	// up 38
+		if (cmndCircle.y > 66) {
+			console.log('up');
+			cmndCircle.y -= cmndCircle.speed;
+		}
+	} if (event.keyCode === 40) {
+	// down 40
+		if (cmndCircle.y < 544) {
+			console.log('down');
+			cmndCircle.y += cmndCircle.speed;
+
+		}
+	} if (event.keyCode === 37) {
+	// left 37
+		if (cmndCircle.x > 66) {
+			console.log('left');
+			cmndCircle.x -= cmndCircle.speed;
+
+		}
+	} if (event.keyCode === 39) {
+	// right 39
+		if (cmndCircle.x < 544) {
+			console.log('right');
+			cmndCircle.x += cmndCircle.speed;
+		}
+	}
+	clearRect();
+	cmndCircle.drawHerself();	
+});
+	
+
+function clearRect(){
+		//erases ENTIRE CANVAS
+		ctx.clearRect(0, 0, canvas.width, canvas.height)
+}
+
+const admiralRect = {
+	height: 60,
+	width: 100,
+	x: 100,
+	y: 100,
+	color: 'goldenrod',
+	drawHisself() {
+		ctx.beginPath();
+		ctx.rect(this.x, this.y, this.width, this.height);
+		ctx.fillStyle = this.color;
+		ctx.fill();
+		ctx.closePath( );
+	}
+};
+
+admiralRect.drawHisself();
+
+//admiralRect should move down automatically via animation
+
+//the way you do animation in canvas is: 
+
+//window.requestAnimatoinFrame
+
+//create a function (call it animate or something uncreative)
+//inside that function, pass that function to window.requestAnimationFrame
+//this is recursion, we will use our animate function as a recursive callback
+
+let counter = 0
+function animate() {
+
+	//code in here will be automatically executed approx 60 times per second (fps)
+	counter++;
+	console.log(counter);
+	admiralRect.y++; 
+	clearRect();
+	admiralRect.drawHisself();
+	cmndCircle.drawHerself();
+
+	//call this at the end: 
+	window.requestAnimationFrame(animate);
+};
+
+animate();
+
+
 ************************************************************/
