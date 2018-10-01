@@ -1,5 +1,5 @@
 
-/************************************************************
+/***********************************************************************************
 
 						GAME ZONE
 
@@ -19,13 +19,13 @@ set up canvas/context
 
 then we're going to create a class square for our enemies 
 (possibly a class circle for our hero, TBD)
-************************************************************/
+***********************************************************************************/
 
 console.log('game time');
 
-/************************************************************
+/***********************************************************************************
 					CLASSES & CONSTS
-************************************************************/
+***********************************************************************************/
 
 
 const canvas = document.getElementById('my-canvas');
@@ -82,71 +82,70 @@ class Circle {
 
 
 
-/************************************************************
+/***********************************************************************************
 					  BUTTONS & INPUTS 
-************************************************************/
+***********************************************************************************/
 
 const $start = $('#start');
 const $reset = $('#reset');
+const $clock = $('#clock'); 
 
-//START BUTTON *********************************************
+//START BUTTON *********************************************************************
 
 
 $start.on('click', ()=>{
 
 	game.start();
+
 	$start.hide();
 	$reset.show();
+
 	console.log('start the party')
 	
 });
 
-//RESET BUTTON *********************************************
+//RESET BUTTON ********************************************************************
 
 
 $reset.on('click', ()=>{
+
 	$reset.hide();
 	$start.show();
+	$clock.text('Xs');
+
 	clearInterval(game.intervalID);
 	game.counter = 0;
-	clearCanvas();
+	game.clearCanvas();
 
 	console.log('restart')
 
 });
 
-/************************************************************
+/***********************************************************************************
 						GAME OBJECT
-************************************************************/
-
+***********************************************************************************/
 
 // game object to contain everything
 
 const game = {
 
-
-	//player  = new circle()
-
-	player: new Circle(490, 190, 20, 'brown', 10),
+	player: new Circle(490, 190, 20, 'brown', 10),									//<--character instantiation/info
 	
-	// factory to make enemy squares(){},
+	enemies: [],
 
 	factory: {
-		enemies: [],
 		generateEnemy(){
 
-			let pitchSpeed = Math.floor((Math.random() * 5)+ 2);					//generate's pitch speed (I guess we're in baseball mode rn)
-			const newEnemy = new Square(1000, 190, 10, 10, 'black', pitchSpeed); 	//should generate at right edge of screen
+			let speed = Math.floor((Math.random() * 5)+ 2);							//generate's pitch speed (I guess we're in baseball mode rn)
+			const newEnemy = new Square(1000, 190, 10, 10, 'black', speed); 		//should generate at right edge of screen
 			newEnemy.draw();
-			this.enemies.push(newEnemy);
+			game.enemies.push(newEnemy);
 			return newEnemy;
 
 		}
 	},
 
-	// timer = setInterval, etc. 
-
-	counter: 0, 
+	counter: 0, 																	//<-- timer gore
 
 	intervalID: null,
 
@@ -154,35 +153,75 @@ const game = {
 
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
+			this.updateClock();
 			console.log(this.counter);
 			
-			//now we instantiate a new enemy every 5 seconds
-
 			if ((this.counter % 6) === 0 ) {
-				this.factory.enemies.pop();
 				this.factory.generateEnemy();
+				this.enemies.splice(0, 1);
 			}
 
 		}, 1000)
 
 	},
 
-	start(){
+	updateClock(){
+		$clock.text(this.counter + 's')
+	},
 
+	animationCounter: 0,															//<-- animation stuff starts here
+
+	collisionDetection(target){
+
+		let currentEnemy = this.enemies[0];
+		let player = target;
+		if (currentEnemy.x < (player.x + player.r) && 
+			currentEnemy.x > (player.x - player.r) && 
+			currentEnemy.y < (player.y + player.r) && 
+			currentEnemy.y > (player.y - player.r)) {
+		
+				console.log('hit!');
+				currentEnemy.status = false;
+				console.log(currentEnemy.status);
+
+		}
+	},
+
+	clearCanvas(){
+		
+		ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+	},
+
+	animate() {
+
+		let currentEnemy = game.enemies[0];											//<-- for some reason only works if I do game.tktkt - not this.tktkt - why??
+		game.animationCounter++;													//		(but also like whatever man)
+		// console.log(counter);
+		currentEnemy.x -= currentEnemy.speed; 
+		game.clearCanvas();
 		game.player.draw();
-		game.factory.generateEnemy();
-		game.timer();																	
-		animate();	
+		currentEnemy.draw();
+		game.collisionDetection(game.player);
+		window.requestAnimationFrame(game.animate);
 
 	},
 
 
+	start(){																		//<-- you're looking for this
+
+		this.player.draw();
+		this.factory.generateEnemy();
+		this.timer();																	
+		this.animate();	
+
+	},
+
 };
 
 
-/************************************************************
+/***********************************************************************************
 					ANIMATION JUNK
-************************************************************/
 
 
 //colission detection & stoppage here: 
@@ -231,7 +270,7 @@ function animate() {
 															
 
 
-/************************************************************
+************************************************************************************
 
 						OTHER NOTES
 
@@ -271,7 +310,7 @@ mini-game outlines:
 	-STRETCH: honestly this whole game is a stretch goal
 
 
-*************************************************************
+********************************************************************
 
 
 	HERE'S MY COLLISION DETECTION CODE FROM THE PRACTICE
@@ -324,7 +363,7 @@ const captSquare = {
 };
 
 
-//CIRCLES REF****************************************************
+//CIRCLES REF*******************************************************
 
 
 function circules(){
@@ -366,7 +405,7 @@ const cmndCircle = {
 };
 
 
-//CONTROL REF****************************************************
+//CONTROL REF*******************************************************
 
 
 //two common ways to MOVE STUFF around
@@ -428,7 +467,7 @@ const admiralRect = {
 admiralRect.drawHisself();
 
 
-//ANIMATION REF****************************************************
+//ANIMATION REF*****************************************************
 
 
 //admiralRect should move down automatically via animation
@@ -459,4 +498,4 @@ function animate() {
 animate();
 
 
-************************************************************/
+********************************************************************/

@@ -5,3 +5,19 @@ body {
 canvas {
 	background-color: white;
 }
+
+div {
+	display: flex;
+	justify-content: center;
+}
+
+#buttons {
+	display: flex;
+	justify-content: space-around;
+}
+
+input {
+	height: 40px;
+	width: 1000px;
+	font-size: 35pt;
+}
