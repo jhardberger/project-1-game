@@ -46,16 +46,19 @@ class Square {
 	draw(){
 		
 		if (this.status === true){
+
 			ctx.beginPath();
 			ctx.rect(this.x, this.y, this.width, this.height);
 			ctx.fillStyle = this.color;
 			ctx.fill();
 			ctx.closePath();
+
 		} else {
+
 			ctx.beginPath();														//<-- I suspect there's a simpler solution than this, but this works
 			ctx.closePath();
+
 		}
-		
 	}
 };
 
@@ -193,27 +196,14 @@ const game = {
 
 	},
 
-	animate() {
-
-		let currentEnemy = game.enemies[0];											//<-- for some reason only works if I do game.tktkt - not this.tktkt - why??
-		game.animationCounter++;													//		(but also like whatever man)
-		// console.log(counter);
-		currentEnemy.x -= currentEnemy.speed; 
-		game.clearCanvas();
-		game.player.draw();
-		currentEnemy.draw();
-		game.collisionDetection(game.player);
-		window.requestAnimationFrame(game.animate);
-
-	},
 
 
 	start(){																		//<-- you're looking for this
 		
 		this.player.draw();
 		this.factory.generateEnemy();
-		this.timer();																	
-		this.animate();	
+		this.timer();	
+		animate();																
 
 	},
 
@@ -229,7 +219,9 @@ a mini-grame so that I know what I actually need to add to the game-wide scope.
 this will probably happen in a branch, so watch out! 
 ***********************************************************************************/
 
+	baseballMini(){
 
+	} 
 
 
 
@@ -238,9 +230,25 @@ this will probably happen in a branch, so watch out!
 
 /***********************************************************************************
 					ANIMATION JUNK
+***********************************************************************************/
 
+function animate(){
+
+	let currentEnemy = game.enemies[0];											
+	game.animationCounter++;													
+	// console.log(counter);
+	currentEnemy.x -= currentEnemy.speed; 
+	game.clearCanvas();
+	game.player.draw();
+	currentEnemy.draw();
+	game.collisionDetection(game.player);
+	window.requestAnimationFrame(animate);
+
+};
 
 //colission detection & stoppage here: 
+
+/***********************************************************************************
 
 
 function collisionDetection(){
