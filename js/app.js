@@ -221,9 +221,33 @@ this will probably happen in a branch, so watch out!
 
 	baseballMini(){
 
-	} 
+	},
 
+	oneChar: [
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+		'1', '2', '3', '4', '5', '6', '7', '8', '9'
+	], 
 
+	easyChar: [
+		'af', 'rn', 'ha', 'hi', 'ja', 'go', 'no', 'ya', 'mm', 'mn', 'tx', 'do', 're', 'mi', 'fa', 'so', 'la', 'ti', '42', '69', '00', '10', '01',
+		'ap', 'me', 'we', 'sw', 'xi', 'pi', 'qi', 'to', 'hm', 'hp', 'dm', 'ls', 'cd', 'pwd', 'arc', 'tot', 'axe', '66', '77', '88', '86', '76', '99'
+	], 
+
+	mediumChar: [
+		'wow', 'yes', 'bye', 'omg', 'lol', '000', '420', '6969', 'yeee', 'rofl', 'lmao', 'zip', 'zing', 'zap', 'yip', 'woah', 'elf', 'dog', 'cat',
+		'0000', '000', 'qwert', 'boy', 'girl', 'red', 'blue', 'zig', 'zag', 'exes', 'ohm', 'ano', 'argo', 'bat', 'rat', 'fink', 'yep'
+	],
+
+	hardChar: [
+		'mongo', 'monster', 'apple', 'tipple', 'quest', 'qwest', 'plimp', 'ripple', 'typist', 'axis', 'exist', 'maxim', 'quart', 'track', '00100', 
+		'01010', 'clique', 'dreamt', 'mini', 'mega', 'wort', 'queen', 'green', 'purple', 'mama', 'papa', 'xanax'
+	]
+
+	extraHardChar: [
+		'johnny', 'paualie', 'georgie', 'ringo', 'hillary', 'jeremy', 'nowhere', 'maximum', 'maplethorpe', 'quinelle', 'axeman', 'skeleton', 'argyle', 
+		'rhianna', 'rhianon', 'marquee', 'messerschmidt', 'aragorn', 'barnaby', 'huxtable', 'ripperton', 'quagmire', 'quinlan', 'starburst', 'restaurant', 
+		'opportunist', 'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
+	]
 
 };
 
