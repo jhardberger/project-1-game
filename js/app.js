@@ -305,24 +305,18 @@ these are my arrays and word-building functions
 
 	wordCheck(){
 
-		console.log(this.idArray);
-
-		let currentChar = this.idArray[0];
-
-		console.log("current char: " + currentChar);
+		console.log(this.idArray[0]);
 		console.log("key: " + this.key);
 
-		if (this.key === currentChar) {
+		if (this.key === this.idArray[0]) {
 			console.log('true');
-			if (this.idArray.length > 0) {
-				this.idArray.splice(0, 1);
-			} 
-		}
+			this.idArray.splice(0, 1);
+		} if (this.idArray.length === 0) {
+			console.log('thas all folk');
+		} 
+		
 	}
-
-
-
-};
+}; 
 
 game.baseballMini();
 
