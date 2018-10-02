@@ -128,12 +128,17 @@ $reset.on('click', ()=>{
 
 $(document).on('keydown', (event)=>{												//<--saves the letter of each key to the game's key value
 	// console.log(event.key);
-	let letter = event.key
-	$('#display').append(letter)
-	game.key = letter;
-	console.log(game.key);
-	game.wordCheck()
-})
+	if (
+		(event.keyCode >= 48 && event.keyCode <= 57) || 
+		(event.keyCode >= 65 && event.keyCode <= 90) || 
+		(event.keyCode === 13)) {
+			let letter = event.key
+			$('#display').append(letter)
+			game.key = letter;
+			console.log(game.key);
+			game.wordCheck()
+		}
+});
 
 
 /***********************************************************************************
@@ -144,15 +149,17 @@ $(document).on('keydown', (event)=>{												//<--saves the letter of each ke
 
 const game = {
 
-	player: new Circle(490, 190, 20, 'brown', 10),									//<--character instantiation/info
+	player: new Circle(490, 190, 20, 'red', 0),									//<--character instantiation/info
 	
+	interceptor: new Circle(440, 195, 10, 'black', 10),
+
 	enemies: [],
 
 	factory: {
 		generateEnemy(){
 
 			let speed = Math.floor((Math.random() * 5)+ 2);							//generate's pitch speed (I guess we're in baseball mode rn)
-			const newEnemy = new Square(1000, 190, 10, 10, 'black', speed); 		//should generate at right edge of screen
+			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
 			newEnemy.draw();
 			game.enemies.push(newEnemy);
 			return newEnemy;
@@ -187,6 +194,8 @@ const game = {
 
 	animationCounter: 0,															//<-- animation stuff starts here
 
+	strikeCounter: 0,
+
 	collisionDetection(target){
 
 		let currentEnemy = this.enemies[0];
@@ -196,7 +205,9 @@ const game = {
 			currentEnemy.y < (player.y + player.r) && 
 			currentEnemy.y > (player.y - player.r)) {
 		
-				console.log('hit!');
+				console.log('');
+				this.strikeCounter++;
+				$('#score').append('K')
 				currentEnemy.status = false;
 				console.log(currentEnemy.status);
 
@@ -213,32 +224,14 @@ const game = {
 
 	start(){																		//<-- you're looking for this
 		
-		$('#passphrase').text('Ready to start? If so type "yes"')
-		this.idArray = ['y', 'e', 's']
-
-		if(this.advanceWord() === true) {
-			this.baseballMini();
-		}
+		$('#passphrase').text('Ready to start? If so type "yes", then hit the ENTER key')
 
 	},
 
-/***********************************************************************************
-ok so, so far everything has been pretty game-wid in scope. what I now am going to 
-attempt to set up is the indivdual mini-game methods, which will reskin the master
-game and slightly change the rules. 
-
-along the way, I'll probably have to add more stuff the universal scope - that's
-both cool and good. I could start with that, but I think I need to start building
-a mini-grame so that I know what I actually need to add to the game-wide scope.
-
-this will probably happen in a branch, so watch out! 
-***********************************************************************************/
-
-	baseballMini: {
-
-		start(){
+	gameOn(){																		//<-- mini game buildout 1
 
 			this.player.draw();
+			this.interceptor.draw();
 			this.factory.generateEnemy();
 			this.timer();	
 			animate();		
@@ -247,10 +240,8 @@ this will probably happen in a branch, so watch out!
 	
 			if (this.advanceWord() === true) {
 				this.makeWord(this.easyChar, this.mediumChar)
-				
-			}
-		}
-		
+
+			}		
 	},
 
 /***********************************************************************************
@@ -317,16 +308,25 @@ these are my arrays and word-building functions
 
 	key: null,																		//<-- this works with the keydown event listener (see jquery block)
 
-	idArray: [],
+	idArray: [1],
 
 	wordCheck(){
 
 		console.log(this.idArray[0]);
 		console.log("key: " + this.key);
 
-		if (this.key === this.idArray[0]) {
-			console.log('true');
-			this.idArray.splice(0, 1);
+		if (this.key === 'Enter') {
+			$('#display').text(' ')
+			this.gameOn();															//<-- GOING TO HAVE TO CHANGE LATER BUT WORKS FOR NOW
+		} else {
+
+			if (this.key === this.idArray[0]) {
+
+				console.log('true');
+				this.idArray.splice(0, 1);
+
+			}
+
 		}
 
 		this.advanceWord();
