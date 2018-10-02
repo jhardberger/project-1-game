@@ -51,14 +51,9 @@ class Square {
 			ctx.rect(this.x, this.y, this.width, this.height);
 			ctx.fillStyle = this.color;
 			ctx.fill();
-			ctx.closePath();
+			// ctx.closePath();
 
-		} else {
-
-			ctx.beginPath();														//<-- I suspect there's a simpler solution than this, but this works
-			ctx.closePath();
-
-		}
+		} 
 	}
 };
 
@@ -74,11 +69,10 @@ class Circle {
 	}
 	draw(){
 
-		ctx.beginPath
+		ctx.beginPath()
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
 		ctx.fillStyle = this.color;
 		ctx.fill();
-		ctx.closePath();
 	}
 
 };
@@ -151,7 +145,7 @@ const game = {
 
 	player: new Circle(490, 190, 20, 'red', 0),									//<--character instantiation/info
 	
-	interceptor: new Circle(440, 195, 10, 'black', 10),
+	interceptor: new Circle(200, 195, 20, 'black', 10),
 
 	enemies: [],
 
@@ -206,8 +200,10 @@ const game = {
 			currentEnemy.y > (player.y - player.r)) {
 		
 				console.log('');
-				this.strikeCounter++;
-				$('#score').append('K')
+				if (currentEnemy.status === true) {
+					$('#score').append('K');
+					this.strikeCounter++;
+				}
 				currentEnemy.status = false;
 				console.log(currentEnemy.status);
 
@@ -356,6 +352,7 @@ function animate(){
 	currentEnemy.x -= currentEnemy.speed; 
 	game.clearCanvas();
 	game.player.draw();
+	game.interceptor.draw();
 	currentEnemy.draw();
 	game.collisionDetection(game.player);
 	window.requestAnimationFrame(animate);
