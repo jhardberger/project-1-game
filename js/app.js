@@ -86,7 +86,7 @@ class Circle {
 
 
 /***********************************************************************************
-					  BUTTONS & INPUTS 
+					  BUTTONS & INPUTS (JQUERY BABY)
 ***********************************************************************************/
 
 const $start = $('#start');
@@ -126,11 +126,11 @@ $reset.on('click', ()=>{
 
 //KEYSTROKE LISTENER ***************************************************************
 
-$(document).on('keydown', (event)=>{
+$(document).on('keydown', (event)=>{												//<--saves the letter of each key to the game's key value
 	// console.log(event.key);
 	game.key = event.key;
 	console.log(game.key);
-
+	game.wordCheck()
 })
 
 
@@ -167,6 +167,7 @@ const game = {
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
 			this.updateClock();
+			// this.wordCheck();													//<-- put word check here for now, potentiall remove later
 			console.log(this.counter);
 			
 			if ((this.counter % 6) === 0 ) {
@@ -231,6 +232,13 @@ this will probably happen in a branch, so watch out!
 
 	baseballMini(){
 
+		this.makeWord(this.easyChar, this.easyChar);
+
+		console.log(this.currentWord);
+
+		$('h2').text(this.currentWord);
+
+		this.idArray = this.currentWord.split("");
 	},
 
 /***********************************************************************************
@@ -263,48 +271,60 @@ these are my arrays and word-building functions
 		'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
 	],
 
+	currentWord: null,
+
 	makeWord(array1, array2){
 
 		let wordChars = [];
 
 		for (let i = 0; i < 3; i++) {
+
 			let thisArray = null;
 			let arrayInteger = (Math.floor((Math.random() * 2)) + 1);
+			
 			if (arrayInteger === 1) {
 				thisArray = array1;
 			} if (arrayInteger === 2) {
 				thisArray = array2;
 			} 			
+
 			let randInteger = (Math.floor(Math.random() * thisArray.length));
 			wordChars.push(thisArray[randInteger]);
+
 		}; 
 
 		let word = wordChars.join("");
 		// console.log(word);
-		return word;
+		this.currentWord = word;
 
 	},
 
-	key: null,
+	key: null,																		//<-- this works with the keydown event listener (see jquery block)
+
+	idArray: [],
 
 	wordCheck(){
-		let word = this.makeWord(this.easyChar, this.mediumChar); 
 
-		console.log(word);
+		console.log(this.idArray);
 
-		$('h2').text(word);
+		let currentChar = this.idArray[0];
 
-		let idArray = word.split("");
+		console.log("current char: " + currentChar);
+		console.log("key: " + this.key);
 
-		console.log(idArray);
-
+		if (this.key === currentChar) {
+			console.log('true');
+			if (this.idArray.length > 0) {
+				this.idArray.splice(0, 1);
+			} 
+		}
 	}
 
 
 
 };
 
-game.wordCheck();
+game.baseballMini();
 
 /***********************************************************************************
 					ANIMATION JUNK
