@@ -16,6 +16,15 @@ div {
 	justify-content: space-around;
 }
 
+#input {
+	display: flex;
+	flex-direction: column;
+}
+
+h2{
+	text-align: center;
+}
+
 input {
 	height: 40px;
 	width: 1000px;

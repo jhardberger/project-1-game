@@ -249,8 +249,8 @@ these are my arrays and word-building functions
 
 	insaneChar: [
 		'johnny', 'paualie', 'georgie', 'ringo', 'hillary', 'jeremy', 'nowhere', 'maximum', 'maplethorpe', 'quinelle', 'axeman', 'skeleton', 'argyle', 
-		'rhianna', 'rhianon', 'marquee', 'messerschmidt', 'aragorn', 'barnaby', 'huxtable', 'ripperton', 'quagmire', 'quinlan', 'starburst', 'restaurant', 
-		'opportunist', 'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
+		'rhianna', 'rhianon', 'marquee', 'aragorn', 'barnaby', 'huxtable', 'ripperton', 'quagmire', 'quinlan', 'starburst', 'restaurant', 'opportunist', 
+		'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
 	],
 
 	makeWord(array1, array2){
@@ -260,20 +260,31 @@ these are my arrays and word-building functions
 		for (let i = 0; i < 3; i++) {
 			let thisArray = null;
 			let arrayInteger = (Math.floor((Math.random() * 2)) + 1);
-			console.log(arrayInteger);
 			if (arrayInteger === 1) {
 				thisArray = array1;
 			} if (arrayInteger === 2) {
 				thisArray = array2;
 			} 			
-			console.log(thisArray);
 			let randInteger = (Math.floor(Math.random() * thisArray.length));
 			wordChars.push(thisArray[randInteger]);
 		}; 
 
 		let word = wordChars.join("");
-		console.log(word);
+		// console.log(word);
 		return word;
+
+	},
+
+	wordCheck(){
+		let word = this.makeWord(this.easyChar, this.mediumChar); 
+
+		console.log(word);
+
+		$('h2').text(word);
+
+		let idArray = word.split("");
+
+		console.log(idArray);
 
 	}
 
@@ -281,7 +292,7 @@ these are my arrays and word-building functions
 
 };
 
-game.makeWord(game.insaneChar, game.mediumChar);
+game.wordCheck();
 
 /***********************************************************************************
 					ANIMATION JUNK
