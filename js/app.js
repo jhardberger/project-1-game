@@ -128,7 +128,9 @@ $reset.on('click', ()=>{
 
 $(document).on('keydown', (event)=>{												//<--saves the letter of each key to the game's key value
 	// console.log(event.key);
-	game.key = event.key;
+	let letter = event.key
+	$('#display').append(letter)
+	game.key = letter;
 	console.log(game.key);
 	game.wordCheck()
 })
@@ -167,7 +169,7 @@ const game = {
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
 			this.updateClock();
-			// this.wordCheck();													//<-- put word check here for now, potentiall remove later
+			// this.wordCheck();														//<-- put word check here for now, potentiall remove later
 			console.log(this.counter);
 			
 			if ((this.counter % 6) === 0 ) {
@@ -211,10 +213,12 @@ const game = {
 
 	start(){																		//<-- you're looking for this
 		
-		this.player.draw();
-		this.factory.generateEnemy();
-		this.timer();	
-		animate();																
+		$('#passphrase').text('Ready to start? If so type "yes"')
+		this.idArray = ['y', 'e', 's']
+
+		if(this.advanceWord() === true) {
+			this.baseballMini();
+		}
 
 	},
 
@@ -230,15 +234,23 @@ a mini-grame so that I know what I actually need to add to the game-wide scope.
 this will probably happen in a branch, so watch out! 
 ***********************************************************************************/
 
-	baseballMini(){
+	baseballMini: {
 
-		this.makeWord(this.easyChar, this.easyChar);
+		start(){
 
-		console.log(this.currentWord);
-
-		$('h2').text(this.currentWord);
-
-		this.idArray = this.currentWord.split("");
+			this.player.draw();
+			this.factory.generateEnemy();
+			this.timer();	
+			animate();		
+	
+			this.makeWord(this.easyChar, this.easyChar);
+	
+			if (this.advanceWord() === true) {
+				this.makeWord(this.easyChar, this.mediumChar)
+				
+			}
+		}
+		
 	},
 
 /***********************************************************************************
@@ -297,6 +309,10 @@ these are my arrays and word-building functions
 		// console.log(word);
 		this.currentWord = word;
 
+		$('#passphrase').text(this.currentWord);
+
+		this.idArray = this.currentWord.split("");
+
 	},
 
 	key: null,																		//<-- this works with the keydown event listener (see jquery block)
@@ -311,14 +327,22 @@ these are my arrays and word-building functions
 		if (this.key === this.idArray[0]) {
 			console.log('true');
 			this.idArray.splice(0, 1);
-		} if (this.idArray.length === 0) {
-			console.log('thas all folk');
-		} 
+		}
+
+		this.advanceWord();
 		
+	},
+
+	advanceWord(){
+		if (this.idArray.length === 0) {
+
+			$('#display').text(' ');
+			this.makeWord(this.easyChar, this.easyChar);
+
+		}
 	}
 }; 
 
-game.baseballMini();
 
 /***********************************************************************************
 					ANIMATION JUNK
