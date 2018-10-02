@@ -58,8 +58,9 @@ class Square {
 };
 
 class Circle {
-	constructor(x, y, r, color, speed){
-// 
+	constructor(name, x, y, r, color, speed){
+
+		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.r = r;
@@ -170,9 +171,9 @@ $(document).on('keydown', (event)=>{												//<--saves the letter of each ke
 
 const game = {
 
-	player: new Circle(490, 190, 20, 'red', 0),									//<--character instantiation/info
+	player: new Circle('player', 490, 190, 20, 'red', 0),									//<--character instantiation/info
 	
-	interceptor: new Circle(420, 195, 10, 'black', 30),
+	interceptor: new Circle('interceptor', 420, 195, 10, 'black', 30),
 
 	enemies: [],
 
@@ -231,8 +232,11 @@ const game = {
 		
 				console.log('');
 				if (currentEnemy.status === true) {
-					$('#score').append('K');
-					this.strikeCounter++;
+
+					console.log(player.name + ' was hit');
+
+					// $('#score').append('K');
+					// this.strikeCounter++;
 				}
 				currentEnemy.status = false;
 				console.log(currentEnemy.status);
@@ -395,6 +399,7 @@ function animate(){
 	game.interceptor.draw();
 	currentEnemy.draw();
 	game.collisionDetection(game.player);
+	game.collisionDetection(game.interceptor);
 	window.requestAnimationFrame(animate);
 
 };
