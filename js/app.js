@@ -107,7 +107,7 @@ $start.on('click', ()=>{
 	
 });
 
-//RESET BUTTON ********************************************************************
+//RESET BUTTON *********************************************************************
 
 
 $reset.on('click', ()=>{
@@ -123,6 +123,16 @@ $reset.on('click', ()=>{
 	console.log('restart')
 
 });
+
+//KEYSTROKE LISTENER ***************************************************************
+
+$(document).on('keydown', (event)=>{
+	// console.log(event.key);
+	game.key = event.key;
+	console.log(game.key);
+
+})
+
 
 /***********************************************************************************
 						GAME OBJECT
@@ -274,6 +284,8 @@ these are my arrays and word-building functions
 		return word;
 
 	},
+
+	key: null,
 
 	wordCheck(){
 		let word = this.makeWord(this.easyChar, this.mediumChar); 
