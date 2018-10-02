@@ -122,16 +122,43 @@ $reset.on('click', ()=>{
 
 $(document).on('keydown', (event)=>{												//<--saves the letter of each key to the game's key value
 	// console.log(event.key);
-	if (
-		(event.keyCode >= 48 && event.keyCode <= 57) || 
-		(event.keyCode >= 65 && event.keyCode <= 90) || 
-		(event.keyCode === 13)) {
-			let letter = event.key
-			$('#display').append(letter)
-			game.key = letter;
-			console.log(game.key);
-			game.wordCheck()
+	// if (game.counter === 0){
+		if(	
+			(event.keyCode >= 48 && event.keyCode <= 57) || 
+			(event.keyCode >= 65 && event.keyCode <= 90) || 
+			(event.keyCode === 13)) {
+				if (event.keyCode === 13) {
+
+					let letter = event.key
+					game.key = letter;
+					console.log(game.key);
+					game.wordCheck();
+
+				} else {
+					
+					let letter = event.key
+					$('#display').append(letter)
+					game.key = letter;
+					console.log(game.key);
+					game.wordCheck()
+
+				}
+
 		}
+	// } else {
+	// 	if(	
+	// 		(event.keyCode >= 48 && event.keyCode <= 57) || 
+	// 		(event.keyCode >= 65 && event.keyCode <= 90) || 
+	// 		(event.keyCode === 13)) {
+
+	// 		let letter = event.key
+	// 		$('#display').append(letter)
+	// 		game.key = letter;
+	// 		console.log(game.key);
+	// 		game.wordCheck()
+
+	// 	}
+	// }
 });
 
 
@@ -145,7 +172,7 @@ const game = {
 
 	player: new Circle(490, 190, 20, 'red', 0),									//<--character instantiation/info
 	
-	interceptor: new Circle(200, 195, 20, 'black', 10),
+	interceptor: new Circle(420, 195, 10, 'black', 30),
 
 	enemies: [],
 
@@ -174,6 +201,9 @@ const game = {
 			console.log(this.counter);
 			
 			if ((this.counter % 6) === 0 ) {
+
+				this.interceptor.x = 420;
+
 				this.factory.generateEnemy();
 				this.enemies.splice(0, 1);
 			}
@@ -234,10 +264,11 @@ const game = {
 	
 			this.makeWord(this.easyChar, this.easyChar);
 	
-			if (this.advanceWord() === true) {
-				this.makeWord(this.easyChar, this.mediumChar)
+			// if (this.advanceWord() === true) {
+				
+			// 	this.makeWord(this.easyChar, this.mediumChar)
 
-			}		
+			// }		
 	},
 
 /***********************************************************************************
@@ -312,14 +343,23 @@ these are my arrays and word-building functions
 		console.log("key: " + this.key);
 
 		if (this.key === 'Enter') {
-			$('#display').text(' ')
-			this.gameOn();															//<-- GOING TO HAVE TO CHANGE LATER BUT WORKS FOR NOW
-		} else {
+			if (this.counter === 0){
+				$('#display').text(' ')	
+				this.gameOn();			
+			}											
+		}
+
+		else {
+
+			if (this.key === 'Enter') {
+				console.log('everything ok');										
+			}
 
 			if (this.key === this.idArray[0]) {
 
 				console.log('true');
 				this.idArray.splice(0, 1);
+				this.interceptor.x += this.interceptor.speed;
 
 			}
 
