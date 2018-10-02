@@ -223,34 +223,65 @@ this will probably happen in a branch, so watch out!
 
 	},
 
-	oneChar: [
+/***********************************************************************************
+these are my arrays and word-building functions
+***********************************************************************************/
+
+	easyChar: [
 		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 		'1', '2', '3', '4', '5', '6', '7', '8', '9'
 	], 
 
-	easyChar: [
+	mediumChar: [
 		'af', 'rn', 'ha', 'hi', 'ja', 'go', 'no', 'ya', 'mm', 'mn', 'tx', 'do', 're', 'mi', 'fa', 'so', 'la', 'ti', '42', '69', '00', '10', '01',
 		'ap', 'me', 'we', 'sw', 'xi', 'pi', 'qi', 'to', 'hm', 'hp', 'dm', 'ls', 'cd', 'pwd', 'arc', 'tot', 'axe', '66', '77', '88', '86', '76', '99'
 	], 
 
-	mediumChar: [
+	hardChar: [
 		'wow', 'yes', 'bye', 'omg', 'lol', '000', '420', '6969', 'yeee', 'rofl', 'lmao', 'zip', 'zing', 'zap', 'yip', 'woah', 'elf', 'dog', 'cat',
 		'0000', '000', 'qwert', 'boy', 'girl', 'red', 'blue', 'zig', 'zag', 'exes', 'ohm', 'ano', 'argo', 'bat', 'rat', 'fink', 'yep'
 	],
 
-	hardChar: [
+	extraHardChar: [
 		'mongo', 'monster', 'apple', 'tipple', 'quest', 'qwest', 'plimp', 'ripple', 'typist', 'axis', 'exist', 'maxim', 'quart', 'track', '00100', 
 		'01010', 'clique', 'dreamt', 'mini', 'mega', 'wort', 'queen', 'green', 'purple', 'mama', 'papa', 'xanax'
-	]
+	],
 
-	extraHardChar: [
+	insaneChar: [
 		'johnny', 'paualie', 'georgie', 'ringo', 'hillary', 'jeremy', 'nowhere', 'maximum', 'maplethorpe', 'quinelle', 'axeman', 'skeleton', 'argyle', 
 		'rhianna', 'rhianon', 'marquee', 'messerschmidt', 'aragorn', 'barnaby', 'huxtable', 'ripperton', 'quagmire', 'quinlan', 'starburst', 'restaurant', 
 		'opportunist', 'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
-	]
+	],
+
+	makeWord(array1, array2){
+
+		let wordChars = [];
+
+		for (let i = 0; i < 3; i++) {
+			let thisArray = null;
+			let arrayInteger = (Math.floor((Math.random() * 2)) + 1);
+			console.log(arrayInteger);
+			if (arrayInteger === 1) {
+				thisArray = array1;
+			} if (arrayInteger === 2) {
+				thisArray = array2;
+			} 			
+			console.log(thisArray);
+			let randInteger = (Math.floor(Math.random() * thisArray.length));
+			wordChars.push(thisArray[randInteger]);
+		}; 
+
+		let word = wordChars.join("");
+		console.log(word);
+		return word;
+
+	}
+
+
 
 };
 
+game.makeWord(game.insaneChar, game.mediumChar);
 
 /***********************************************************************************
 					ANIMATION JUNK
