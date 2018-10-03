@@ -66,7 +66,8 @@ class Circle {
 		this.r = r;
 		this.color = color;
 		this.speed = speed;															//<-- not sure Circle needs speed yet, but jic
-	
+		this.hits = 0;
+
 	}
 	draw(){
 
@@ -180,7 +181,7 @@ const game = {
 	factory: {
 		generateEnemy(){
 
-			let speed = Math.floor((Math.random() * 5)+ 2);							//generate's pitch speed (I guess we're in baseball mode rn)
+			let speed = Math.floor((Math.random() * 4)+ 2);							//generate's pitch speed (I guess we're in baseball mode rn)
 			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
 			newEnemy.draw();
 			game.enemies.push(newEnemy);
@@ -197,13 +198,14 @@ const game = {
 
 		this.intervalID = setInterval(()=>{ 
 			this.counter++;
-			this.updateClock();
-			// this.wordCheck();														//<-- put word check here for now, potentiall remove later
+			this.update();
+			// this.wordCheck();													//<-- put word check here for now, potentiall remove later
 			console.log(this.counter);
 			
-			if ((this.counter % 6) === 0 ) {
+			if ((this.counter % 5) === 0 ) {
 
 				this.interceptor.x = 420;
+				this.advanceWord();
 
 				this.factory.generateEnemy();
 				this.enemies.splice(0, 1);
@@ -213,13 +215,21 @@ const game = {
 
 	},
 
-	updateClock(){
+	update(){
 		$clock.text(this.counter + 's')
+
+		let strikes = this.player.hits
+		$('#score').text('Strikes: ' + strikes);
+
+		if (strikes > 2) {
+			clearInterval(this.intervalID);
+			// console.log('game over bitch');
+			$('#passphrase').text('game over nerd')
+		}
+
 	},
 
 	animationCounter: 0,															//<-- animation stuff starts here
-
-	strikeCounter: 0,
 
 	collisionDetection(target){
 
@@ -234,9 +244,9 @@ const game = {
 				if (currentEnemy.status === true) {
 
 					console.log(player.name + ' was hit');
-
-					// $('#score').append('K');
-					// this.strikeCounter++;
+					// return player.name;
+					player.hits++;
+					
 				}
 				currentEnemy.status = false;
 				console.log(currentEnemy.status);
@@ -369,17 +379,15 @@ these are my arrays and word-building functions
 
 		}
 
-		this.advanceWord();
+		// this.advanceWord();
 		
 	},
 
 	advanceWord(){
-		if (this.idArray.length === 0) {
-
-			$('#display').text(' ');
-			this.makeWord(this.easyChar, this.easyChar);
-
-		}
+		
+		$('#display').text(' ');
+		this.makeWord(this.easyChar, this.easyChar);
+		
 	}
 }; 
 
