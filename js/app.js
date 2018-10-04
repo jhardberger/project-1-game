@@ -246,11 +246,18 @@ const metaGame = {
 		this.makeWord(array1, array2);
 		$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_default.gif')
 		gifFrames = [
-	
-			"/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif",
-			"/Users/john/salty-sardines/project-1-game/new_game_images/swing2_test.gif"
-
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing6.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
 		];
+
 		
 	}
 
