@@ -1,26 +1,32 @@
 /***********************************************************************************
 						GAME ZONE
-basic user stories/goals for today: 
-	-get working wireframe
-	-iron out hitbox kinks
-	-simplest possible working model of one game
-	-games 2 & are a plus
-						PSEUDO
-ok let's pseudo!
-set up canvas/context
-then we're going to create a class square for our enemies 
-(possibly a class circle for our hero, TBD)
-***********************************************************************************/
 
-console.log('game time');
+UPDATE 10/3: 
+-we have a really nice, intuitive MVP (I think) of game1
+-we have an improved architecture, which seperates out universal functions
+into a "metagame" object, which could, with the mini games, later be encompassed
+in like some kind of super-object if desired (we'll see)
 
-/***********************************************************************************
+
+
+
 					CLASSES & CONSTS
 ***********************************************************************************/
 
 
+//CANVAS****************************************************************************
+
 const canvas = document.getElementById('my-canvas');
 const ctx = canvas.getContext('2d');
+
+//ART*******************************************************************************
+
+// const loadingImg = document.getElementById('loadingImg');
+// ctx.drawImage(loadingImg, 0, 0, loadingImg.width, loadingImg.height); <---------could work for individual frames but not for loading gif. 
+
+
+//CLASSES***************************************************************************
+
 
 class Square {
 	constructor(x, y, h, w, color, speed){
@@ -48,15 +54,14 @@ class Square {
 	}
 };
 
-class Circle {
-	constructor(name, x, y, r, color, speed){
+class Circle {constructor(name, x, y, r, color, speed){
 
 		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.r = r;
 		this.color = color;
-		this.speed = speed;															//<-- not sure Circle needs speed yet, but jic
+		this.speed = speed;															
 		this.hits = 0;
 
 	}
@@ -77,233 +82,97 @@ class Circle {
 ***********************************************************************************/
 
 const $start = $('#start');
-const $reset = $('#reset');
+const $reset = $('#reset'); 														//<-- multiple buttons for the different games?
 const $clock = $('#clock'); 
-
-//START BUTTON *********************************************************************
-
-
-$start.on('click', ()=>{
-
-	game.start();
-
-	$start.hide();
-	$reset.show();
-
-	console.log('start the party')
-	
-});
-
-//RESET BUTTON *********************************************************************
 
 
 $reset.on('click', ()=>{
 
 	$reset.hide();
-	$start.show();
+	// $start.show();
+
+	clearInterval(baseball.intervalID);
+	clearCanvas();
+
+	baseball.player.hits = 0;
+	baseball.counter = 0;
+	baseball.interceptor.x = 460;
+
+	
 	$clock.text('Xs');
-
-	clearInterval(game.intervalID);
-	game.counter = 0;
-	game.clearCanvas();
-
+	$('#score').text('Strikes: ')
+	$('#passphrase').text('Ready to start? If so type "yes", then hit the ENTER key')
+	$('#display').text(' ')
 	console.log('restart')
 
 });
 
 //KEYSTROKE LISTENER ***************************************************************
 
-$(document).on('keydown', (event)=>{												//<--saves the letter of each key to the game's key value
+$(document).on('keydown', (event)=>{												//<--saves the letter of each key to the metaGame's key value
 	// console.log(event.key);
-	// if (game.counter === 0){
 		if(	
 			(event.keyCode >= 48 && event.keyCode <= 57) || 
 			(event.keyCode >= 65 && event.keyCode <= 90) || 
 			(event.keyCode === 13)) {
-				if (event.keyCode === 13) {
+				
+				metaGame.key = event.key;
+				console.log(metaGame.key);
 
-					let letter = event.key
-					game.key = letter;
-					console.log(game.key);
-					game.wordCheck();
-
-				} else {
-					
-					let letter = event.key
-					$('#display').append(letter)
-					game.key = letter;
-					console.log(game.key);
-					game.wordCheck()
-
+				if (event.keyCode != 13){
+					$('#display').append(metaGame.key)
 				}
 
+				metaGame.wordCheck()
+
+				
+				// if (event.keyCode === 13) {
+
+				// 	metaGame.wordCheck();
+
+				// } else {
+					
+
+				// }
+
 		}
-	// } else {
-	// 	if(	
-	// 		(event.keyCode >= 48 && event.keyCode <= 57) || 
-	// 		(event.keyCode >= 65 && event.keyCode <= 90) || 
-	// 		(event.keyCode === 13)) {
 
-	// 		let letter = event.key
-	// 		$('#display').append(letter)
-	// 		game.key = letter;
-	// 		console.log(game.key);
-	// 		game.wordCheck()
-
-	// 	}
-	// }
 });
 
 
 /***********************************************************************************
-						GAME OBJECT
+						METAGAME
 ***********************************************************************************/
 
-// game object to contain everything
+const metaGame = {
 
-const game = {
+	baseballScore: null,
 
-	player: new Circle('player', 490, 190, 20, 'red', 0),									//<--character instantiation/info
-	
-	interceptor: new Circle('interceptor', 420, 195, 10, 'black', 30),
-
-	enemies: [],
-
-	factory: {
-		generateEnemy(){
-
-			let speed = Math.floor((Math.random() * 4)+ 2);							//generate's pitch speed (I guess we're in baseball mode rn)
-			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
-			newEnemy.draw();
-			game.enemies.push(newEnemy);
-			return newEnemy;
-
-		}
-	},
-
-	counter: 0, 																	//<-- timer gore
-
-	intervalID: null,
-
-	timer(){
-
-		this.intervalID = setInterval(()=>{ 
-			this.counter++;
-			this.update();
-			// this.wordCheck();													//<-- put word check here for now, potentiall remove later
-			console.log(this.counter);
-			
-			if ((this.counter % 5) === 0 ) {
-
-				this.interceptor.x = 420;
-				this.advanceWord();
-
-				this.factory.generateEnemy();
-				this.enemies.splice(0, 1);
-			}
-
-		}, 1000)
-
-	},
-
-	update(){
-		$clock.text(this.counter + 's')
-
-		let strikes = this.player.hits
-		$('#score').text('Strikes: ' + strikes);
-
-		if (strikes > 2) {
-			clearInterval(this.intervalID);
-			// console.log('game over bitch');
-			$('#passphrase').text('game over nerd')
-		}
-
-	},
-
-	animationCounter: 0,															//<-- animation stuff starts here
-
-	collisionDetection(target){
-
-		let currentEnemy = this.enemies[0];
-		let player = target;
-		if (currentEnemy.x < (player.x + player.r) && 
-			currentEnemy.x > (player.x - player.r) && 
-			currentEnemy.y < (player.y + player.r) && 
-			currentEnemy.y > (player.y - player.r)) {
-		
-				console.log('');
-				if (currentEnemy.status === true) {
-
-					console.log(player.name + ' was hit');
-					// return player.name;
-					player.hits++;
-					
-				}
-				currentEnemy.status = false;
-				console.log(currentEnemy.status);
-
-		}
-	},
-
-	clearCanvas(){
-		
-		ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-	},
-
-
-
-	start(){																		//<-- you're looking for this
-		
-		$('#passphrase').text('Ready to start? If so type "yes", then hit the ENTER key')
-
-	},
-
-	gameOn(){																		//<-- mini game buildout 1
-
-			this.player.draw();
-			this.interceptor.draw();
-			this.factory.generateEnemy();
-			this.timer();	
-			animate();		
-	
-			this.makeWord(this.easyChar, this.easyChar);
-	
-			// if (this.advanceWord() === true) {
-				
-			// 	this.makeWord(this.easyChar, this.mediumChar)
-
-			// }		
-	},
-
-/***********************************************************************************
-these are my arrays and word-building functions
-***********************************************************************************/
-
-	easyChar: [
-		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-		'1', '2', '3', '4', '5', '6', '7', '8', '9'
+	easyChar: [				//length: 1
+		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
 	], 
 
-	mediumChar: [
-		'af', 'rn', 'ha', 'hi', 'ja', 'go', 'no', 'ya', 'mm', 'mn', 'tx', 'do', 're', 'mi', 'fa', 'so', 'la', 'ti', '42', '69', '00', '10', '01',
-		'ap', 'me', 'we', 'sw', 'xi', 'pi', 'qi', 'to', 'hm', 'hp', 'dm', 'ls', 'cd', 'pwd', 'arc', 'tot', 'axe', '66', '77', '88', '86', '76', '99'
+	mediumChar: [			//length: 2
+		'af', 'rn', 'ha', 'hi', 'ja', 'go', 'no', 'ya', 'mm', 'mn', 'tx', 'do', 're', 'mi', 'fa', 'so', 'la', 'ti', 'ap', 'me', 'we', 'sw', 
+		'xi', 'pi', 'qi', 'to', 'hm', 'hp', 'dm', 'ls', 'cd', '42', '69', '21', '76', '86', '09'
 	], 
 
-	hardChar: [
-		'wow', 'yes', 'bye', 'omg', 'lol', '000', '420', '6969', 'yeee', 'rofl', 'lmao', 'zip', 'zing', 'zap', 'yip', 'woah', 'elf', 'dog', 'cat',
-		'0000', '000', 'qwert', 'boy', 'girl', 'red', 'blue', 'zig', 'zag', 'exes', 'ohm', 'ano', 'argo', 'bat', 'rat', 'fink', 'yep'
+	hardChar: [				//length: 3
+		'wow', 'yes', 'bye', 'omg', 'lol', 'zip', 'zap', 'yip', 'elf', 'dog', 'cat',  'boy', 'red', 'zig', 'zag', 'exe', 'ohm', 
+		'ano', 'arg', 'bat', 'rat', 'fin', 'yep', 'pup', 'qzx', 'mnm', 'xzy', 'arc', 'tot', 'axe', '420', '808', '009'
 	],
 
-	extraHardChar: [
-		'mongo', 'monster', 'apple', 'tipple', 'quest', 'qwest', 'plimp', 'ripple', 'typist', 'axis', 'exist', 'maxim', 'quart', 'track', '00100', 
-		'01010', 'clique', 'dreamt', 'mini', 'mega', 'wort', 'queen', 'green', 'purple', 'mama', 'papa', 'xanax'
+	extraHardChar: [		//length: 5
+		'mongo', 'apple', 'quest', 'qwest', 'blimp', 'types', 'axels', 'exist', 'maxim', 'quart', 'track', '00100', '01010', 'queue', 'minis', 'magoo', 
+		'worty', 'queen', 'green', 'mamas', 'papas', 'xanax', 'milky', 'ankle', 'rabbi', 'minxy', 'xyzyx', 'qaqaq', 'tigre', 'swoot', 'sweet', 'ringo',
+		'ayo69', '1yes1', '12051', 'ay420'
 	],
 
-	insaneChar: [
-		'johnny', 'paualie', 'georgie', 'ringo', 'hillary', 'jeremy', 'nowhere', 'maximum', 'maplethorpe', 'quinelle', 'axeman', 'skeleton', 'argyle', 
-		'rhianna', 'rhianon', 'marquee', 'aragorn', 'barnaby', 'huxtable', 'ripperton', 'quagmire', 'quinlan', 'starburst', 'restaurant', 'opportunist', 
-		'manticore', 'abalony', 'curlique', 'arabesque', 'ratbatcat', 'robocop', 'argonaut', 'exegesis', 'calrisian', 'cumulus', 'uppity'
+	insaneChar: [			//length: 7
+		'johnnny', 'paualie', 'goergie', 'hillary', 'jeremih', 'nowhere', 'maximum', 'thorpes', 'quinele', 'axemans', 'skelton', 'argyled', 
+		'rhianna', 'rhianon', 'marquee', 'aragorn', 'barnaby', 'huxtaby', 'rippert', 'quagmom', 'quinlan', 'starbby', 'restaur', 'popport', 
+		'buckdre', 'abalony', 'cliqeud', 'babylon', 'ratabat', 'robocop', 'argonot', 'exegesy', 'caliban', 'cumulus', 'wuppity', 'monstar', 
+		'420nice', '69nicee', '0000800', '2222252', '1111717', '6b6bbb6', '5s55s5s', '96780', '98670', '67089', '86079'
 	],
 
 	currentWord: null,
@@ -312,21 +181,11 @@ these are my arrays and word-building functions
 
 		let wordChars = [];
 
-		for (let i = 0; i < 3; i++) {
+		let randInteger1 = (Math.floor(Math.random() * array1.length));
+		wordChars.push(array1[randInteger1]);
 
-			let thisArray = null;
-			let arrayInteger = (Math.floor((Math.random() * 2)) + 1);
-			
-			if (arrayInteger === 1) {
-				thisArray = array1;
-			} if (arrayInteger === 2) {
-				thisArray = array2;
-			} 			
-
-			let randInteger = (Math.floor(Math.random() * thisArray.length));
-			wordChars.push(thisArray[randInteger]);
-
-		}; 
+		let randInteger2 = (Math.floor(Math.random() * array2.length));
+		wordChars.push(array2[randInteger2]);
 
 		let word = wordChars.join("");
 		// console.log(word);
@@ -347,39 +206,157 @@ these are my arrays and word-building functions
 		console.log(this.idArray[0]);
 		console.log("key: " + this.key);
 
-		if (this.key === 'Enter') {
-			if (this.counter === 0){
+		if (baseball.counter === 0) {
+			if (this.key === 'Enter'){
 				$('#display').text(' ')	
-				this.gameOn();			
+				baseball.gameOn();			
 			}											
 		}
 
 		else {
 
-			if (this.key === 'Enter') {
-				console.log('everything ok');										
-			}
-
-			if (this.key === this.idArray[0]) {
+			if (this.key === this.idArray[0]){
 
 				console.log('true');
 				this.idArray.splice(0, 1);
-				this.interceptor.x += this.interceptor.speed;
-
+				baseball.interceptor.x += baseball.interceptor.speed;
+				// $('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif');
 			}
-
 		}
-
-		// this.advanceWord();
 		
 	},
 
-	advanceWord(){
+	advanceWord(array1, array2){
 		
 		$('#display').text(' ');
-		this.makeWord(this.easyChar, this.easyChar);
+		this.makeWord(array1, array2);
+		$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_default.gif')
 		
 	}
+
+};
+
+
+/***********************************************************************************
+					BASEBALL
+***********************************************************************************/
+
+
+const baseball = {
+
+
+/***************************PLAYER INSTANTIATION***********************************/
+
+
+	player: new Circle('player', 490, 190, 20, 'red', 0),
+	
+	interceptor: new Circle('interceptor', 460, 195, 10, 'black', 22),
+
+	enemies: [],
+
+	factory: {																		//<-- migrate outside of game?? TBD
+		
+		generateEnemy(){
+
+			let speed = Math.floor((Math.random() * 3)+ 3);							//CAN INCREMENT DIFFICULTY HERE
+			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
+			newEnemy.draw();
+			baseball.enemies.push(newEnemy);
+			return newEnemy;
+
+		}
+	},
+
+
+/***************************TIMER GORE*********************************************/
+
+
+	counter: 0, 																	
+
+	intervalID: null,
+
+	timer(){
+
+		this.intervalID = setInterval(()=>{ 
+			this.counter++;
+			this.update();
+			console.log(this.counter);
+			
+			if ((this.counter % 5) === 0 ) {
+				
+				this.factory.generateEnemy();
+				this.enemies.splice(0, 1);
+				
+				if (this.counter < 32){												//difficult spike starts here
+																						
+					metaGame.advanceWord(metaGame.easyChar, metaGame.mediumChar);
+					this.interceptor.x = 440;
+
+				} if (this.counter > 32) {											//ADJUST THESE THRESHOLDS FOR DIFFICULT
+
+					metaGame.advanceWord(metaGame.mediumChar, metaGame.hardChar);
+					this.interceptor.x = 400;
+
+				} if (this.counter > 64) {
+					
+					metaGame.advanceWord(metaGame.hardChar, metaGame.extraHardChar);
+					this.interceptor.x = 340;
+
+
+				} if (this.counter > 96) {
+
+					metaGame.advanceWord(metaGame.extraHardChar, metaGame.insaneChar);
+					this.interceptor.x = 260
+				}
+			}
+
+		}, 1000)
+
+	},
+
+
+/***************************STAT UPDATER********************************************/
+
+
+	update(){
+		$clock.text(this.counter + 's')
+
+		let strikes = this.player.hits
+		$('#score').text('Strikes: ' + strikes);
+
+		if (strikes > 2) {
+			let score = this.counter;
+		
+			$('#passphrase').text('game over nerd')
+			$('#display').text('You lasted ' + score + ' seconds (and you are still a nerd)')
+			metaGame.baseballScore = score;
+
+			clearInterval(this.intervalID);
+		}
+
+	},
+
+
+/***************************START/GAME DATA*****************************************/
+
+
+	gameOn(){																		
+
+			$reset.show();
+			this.player.draw();
+			this.interceptor.draw();
+			this.factory.generateEnemy();
+			this.timer();	
+	
+			metaGame.advanceWord(metaGame.easyChar, metaGame.easyChar);
+	
+			// if (this.advanceWord() === true) {
+				
+			// 	this.makeWord(this.easyChar, this.mediumChar)
+
+			// }		
+	}
+
 }; 
 
 
@@ -387,18 +364,55 @@ these are my arrays and word-building functions
 					ANIMATION JUNK
 ***********************************************************************************/
 
-function animate(){
 
-	let currentEnemy = game.enemies[0];											
-	game.animationCounter++;													
-	// console.log(counter);
-	currentEnemy.x -= currentEnemy.speed; 
-	game.clearCanvas();
-	game.player.draw();
-	game.interceptor.draw();
-	currentEnemy.draw();
-	game.collisionDetection(game.player);
-	game.collisionDetection(game.interceptor);
-	window.requestAnimationFrame(animate);
+
+function collisionDetection(target){
+
+	let currentEnemy = baseball.enemies[0];
+	let player = target;
+	if (currentEnemy.x < (player.x + player.r) && 
+		currentEnemy.x > (player.x - player.r) && 
+		currentEnemy.y < (player.y + player.r) && 
+		currentEnemy.y > (player.y - player.r)) {
+	
+			console.log('');
+			if (currentEnemy.status === true) {
+
+				console.log(player.name + ' was hit');
+				// return player.name;
+				player.hits++;
+				
+			}
+			currentEnemy.status = false;
+			console.log(currentEnemy.status);
+
+	}
+};
+
+function clearCanvas(){
+	
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 
 };
+
+animationCounter = 0;															
+
+function animate(){
+
+	animationCounter++;													
+	// console.log(counter);
+	if (baseball.counter > 0){
+		let currentEnemy = baseball.enemies[0];											
+		currentEnemy.x -= currentEnemy.speed; 
+		clearCanvas();
+		baseball.player.draw();
+		baseball.interceptor.draw();
+		currentEnemy.draw();
+		collisionDetection(baseball.player);
+		collisionDetection(baseball.interceptor);
+	}
+	window.requestAnimationFrame(animate);
+};
+
+animate();		
+
