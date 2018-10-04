@@ -21,7 +21,11 @@ const ctx = canvas.getContext('2d');
 
 //ART*******************************************************************************
 
+let gifFrames = [
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2_test.gif"
 
+];
 
 //CLASSES***************************************************************************
 
@@ -208,7 +212,9 @@ const metaGame = {
 				console.log('true');
 				this.idArray.splice(0, 1);
 				baseball.interceptor.x += baseball.interceptor.speed;
-				// $('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif');
+				let currentFrame = gifFrames[0];
+				$('#loadingImg').attr('src', currentFrame);
+				gifFrames.splice(0, 1);
 			}
 		}
 		
@@ -219,6 +225,12 @@ const metaGame = {
 		$('#display').text(' ');
 		this.makeWord(array1, array2);
 		$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_default.gif')
+		gifFrames = [
+	
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing2_test.gif"
+
+		];
 		
 	}
 
