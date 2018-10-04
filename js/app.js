@@ -22,9 +22,16 @@ const ctx = canvas.getContext('2d');
 //ART*******************************************************************************
 
 let gifFrames = [
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1_test.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2_test.gif"
-
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing6.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
 ];
 
 //CLASSES***************************************************************************
@@ -140,31 +147,44 @@ const metaGame = {
 
 	baseballScore: null,
 
-	easyChar: [				//length: 1
-		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 
+	easyChar: [				
+		'apple', 'about', 'angel', 'actor', 'blood', 'blind', 'block', 'boost', 'chase', 'chest', 'catch', 'chair',
+		'drive', 'draft', 'eight', 'entry', 'exist', 'event', 'fight', 'force', 'floor', 'grant', 'green', 'harry', 
+		'inner', 'issue', 'image', 'judge', 'james', 'jones', 'joint', 'later', 'large', 'metal', 'major', 'march',
+		'noise', 'north', 'notes', 'ocean', 'offer', 'other', 'offer', 'paper', 'plant', 'phone', 'roger', 'right',
+		'sheet', 'shape', 'shift', 'sense', 'sight', 'smoke', 'space', 'taste', 'teeth', 'third', 'under', 'write'
 	], 
 
-	mediumChar: [			//length: 2
-		'af', 'rn', 'ha', 'hi', 'ja', 'go', 'no', 'ya', 'mm', 'mn', 'tx', 'do', 're', 'mi', 'fa', 'so', 'la', 'ti', 'ap', 'me', 'we', 'sw', 
-		'xi', 'pi', 'qi', 'to', 'hm', 'hp', 'dm', 'ls', 'cd', '42', '69', '21', '76', '86', '09'
+	mediumChar: [			
+		'angst', 'argon', 'aegis', 'audio', 'byway', 'calif', 'cycle', 'curve', 'coble', 'depth', 'dally', 'equal', 
+		'eccho', 'extra', 'fixed', 'first', 'gyros', 'guard', 'jarre', 'jazzy', 'jonny', 'kinky', 'known', 'laugh', 
+		'leery', 'lingo', 'lemur', 'margo', 'maple', 'maxim', 'mural', 'newly', 'novel', 'plume', 'proto', 'prior', 
+		'quick', 'quiet', 'quiz5', 'queue', 'route', 'riven', 'rough', 'royal', 'seven', 'servo', 'slick', 'sizer', 
+		'syrup', 'tough', 'twice', 'twain', 'usual', 'unity', 'upper', 'whale', 'while', 'wilst', 'wound', 'youth', 
 	], 
 
-	hardChar: [				//length: 3
-		'wow', 'yes', 'bye', 'omg', 'lol', 'zip', 'zap', 'yip', 'elf', 'dog', 'cat',  'boy', 'red', 'zig', 'zag', 'exe', 'ohm', 
-		'ano', 'arg', 'bat', 'rat', 'fin', 'yep', 'pup', 'qzx', 'mnm', 'xzy', 'arc', 'tot', 'axe', '420', '808', '009'
+	hardChar: [				
+		'daryl', 'exegy', 'fifth', 'hymen', 'miasm', 'proxy', 'pretz', 'qwert', 'twixt', 'twine', 'helix', 'insta',
+		'yarow', 'wyley', 'willw', 'yoman', 'ryley', 'rylye', 'allax', 'axels', 'arxca', 'milyt', 'melty', 'alloy',
+		'lilyl', 'gaxby', 'axemn', 'crowz', 'axewz', 'roxxy', 'kazam', 'glalw', 'druqs', 'di11a', '1asso', 'venox',
+		'12men', '009jb', 'ay420', 'ayy69', '1776b', 'b00st', 'lll1l', 'lmfao', '1mf40', 'ingot', 'minsk', '666b6',
+		'ziggy', 'ziisk', 'zyncs', 'zappo', 'xixas', 'xocos', 'n3wb2', 'norte', 'tigre', 'rygbv', 'pinki', 'pikwk'
 	],
 
-	extraHardChar: [		//length: 5
-		'mongo', 'apple', 'quest', 'qwest', 'blimp', 'types', 'axels', 'exist', 'maxim', 'quart', 'track', '00100', '01010', 'queue', 'minis', 'magoo', 
-		'worty', 'queen', 'green', 'mamas', 'papas', 'xanax', 'milky', 'ankle', 'rabbi', 'minxy', 'xyzyx', 'qaqaq', 'tigre', 'swoot', 'sweet', 'ringo',
-		'ayo69', '1yes1', '12051', 'ay420'
+	extraHardChar: [		
+		'psntx', 'ascsw', 'goku2', 'grin8', 'a1ask', 'y11p9', 'artyy', 'xaxis', 'yaxis', '00080', '32333', 'mawyn',
+		'aphex', 'twyxm', 'spasm', 'smixl', 'tis6o', '67v18', 'm4nd1', 'toerj', 'ixyxy', 'qfwfq', 'tzero', '7zero', 
+		'hxpnt', 'ursul', 'spyrl', 'spaxy', 'sp4nx', 'spunk', 'moetz', 'yetzy', 'yitzl', 'maxrn', 'zggq0', 'zgqgu',
+		'krngl', 'golmn', 'bow13', 'symbl', 'strbb', 'drmom', 'dongl', 'dozga', 'bazgo', 'z1ng1', 'zyyvz', 'illst',
+		'pa55y', 'parp1', 'tinsx', 'tnzil', 'tillo', 'spepi', 'pespi', 'wlist', 'tiwce', 'queit', 'quasi', 'm0tt0'	
 	],
 
-	insaneChar: [			//length: 7
-		'johnnny', 'paualie', 'goergie', 'hillary', 'jeremih', 'nowhere', 'maximum', 'thorpes', 'quinele', 'axemans', 'skelton', 'argyled', 
-		'rhianna', 'rhianon', 'marquee', 'aragorn', 'barnaby', 'huxtaby', 'rippert', 'quagmom', 'quinlan', 'starbby', 'restaur', 'popport', 
-		'buckdre', 'abalony', 'cliqeud', 'babylon', 'ratabat', 'robocop', 'argonot', 'exegesy', 'caliban', 'cumulus', 'wuppity', 'monstar', 
-		'420nice', '69nicee', '0000800', '2222252', '1111717', '6b6bbb6', '5s55s5s', '96780', '98670', '67089', '86079'
+	insaneChar: [			
+		'0zx97', '702d3', 'tyxs7', 'gy8v0', 'hx023', '5axon', 'greif', 'hynox', 'h1nun', '4r2nt', '6t9nn', 'grnro',
+		'mg7s9', '19een', '6cess', 'be4rr', 'evrr8', 'se7en', 'e11vn', 'arst8', 'i11ns', 'i0wah', '99696', 'xl1nt',
+		'slint', 'sippo', 'siqqy', 'ryskk', '59eri', '9eryn', 'bnwyn', '6wyyn', 'uili1', 'unher', 'grexl', 'oogie',
+		'zoppq', 'doxys', 'bixl3', '7h7p8', '2rwpx', 'zyzzy', 'ximny', 'werao', 'aeiou', 'laoqs', 'azo0o', 'zoose',
+		'zipty', 'schwt', 'bipfp', '6tyh9', 'alalo', 'alola', 'zgazo', 'ww3w0', 'zp3tz', 'zilch', 'gouro', 'ya1ow' 
 	],
 
 	currentWord: null,
@@ -250,7 +270,7 @@ const baseball = {
 
 	player: new Circle('player', 490, 190, 20, 'red', 0),
 	
-	interceptor: new Circle('interceptor', 460, 195, 10, 'black', 22),
+	interceptor: new Circle('interceptor', 460, 195, 10, 'black', 5),
 
 	enemies: [],
 
@@ -258,7 +278,7 @@ const baseball = {
 		
 		generateEnemy(){
 
-			let speed = Math.floor((Math.random() * 3)+ 3);							//CAN INCREMENT DIFFICULTY HERE
+			let speed = Math.floor((Math.random() * 3)+ 2);							//CAN INCREMENT DIFFICULTY HERE
 			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
 			newEnemy.draw();
 			baseball.enemies.push(newEnemy);
@@ -290,23 +310,26 @@ const baseball = {
 				if (this.counter < 32){												//difficult spike starts here
 																						
 					metaGame.advanceWord(metaGame.easyChar, metaGame.mediumChar);
-					this.interceptor.x = 440;
+					this.interceptor.x = 460;
 
 				} if (this.counter > 32) {											//ADJUST THESE THRESHOLDS FOR DIFFICULT
 
 					metaGame.advanceWord(metaGame.mediumChar, metaGame.hardChar);
-					this.interceptor.x = 400;
+					this.interceptor.x = 460;
 
 				} if (this.counter > 64) {
 					
 					metaGame.advanceWord(metaGame.hardChar, metaGame.extraHardChar);
-					this.interceptor.x = 340;
+					this.interceptor.x = 460;
+					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 3);
 
 
 				} if (this.counter > 96) {
 
 					metaGame.advanceWord(metaGame.extraHardChar, metaGame.insaneChar);
-					this.interceptor.x = 260
+					this.interceptor.x = 600
+					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 4);
+
 				}
 			}
 
