@@ -21,8 +21,6 @@ const ctx = canvas.getContext('2d');
 
 //ART*******************************************************************************
 
-// const loadingImg = document.getElementById('loadingImg');
-// ctx.drawImage(loadingImg, 0, 0, loadingImg.width, loadingImg.height); <---------could work for individual frames but not for loading gif. 
 
 
 //CLASSES***************************************************************************
@@ -124,16 +122,6 @@ $(document).on('keydown', (event)=>{												//<--saves the letter of each ke
 				}
 
 				metaGame.wordCheck()
-
-				
-				// if (event.keyCode === 13) {
-
-				// 	metaGame.wordCheck();
-
-				// } else {
-					
-
-				// }
 
 		}
 
