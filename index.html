@@ -10,24 +10,24 @@
 			<h1>Game Time</h1>
 	</div>
 	<div id="buttons">
-		<button id="start">Start</button>
+<!-- 		<button id="start">Start</button> -->		
 		<button id="reset" hidden>Reset</button>
 		<div id="clock">Xs</div>
 		<div id="score">Strikes:</div>
 	</div>
 	<br>
-	<div>
+	<div id="screen">
 		<canvas id="my-canvas" width="1000" height="400"></canvas>
+		<img src="/Users/john/salty-sardines/project-1-game/new_game_images/swing_gif_starter-display.gif" id="loadingImg">
 	</div>
 	<br>
-	<div id="input">
-		<h2 id ="passphrase">here comes the passphrase</h2>
+	<div id="type-zone">
+		<h2 id ="passphrase">Ready to start? If so type "yes", then hit the ENTER key</h2>
 		<br>
 		<h2 id="display"></h2>
 	</div>
 	<br>
 	<div id="footer">
-		
 	</div>
 	<script
 	  src="https://code.jquery.com/jquery-2.2.4.min.js"
@@ -38,6 +38,7 @@
 	  src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
 	  integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
 	  crossorigin="anonymous"></script>
-	<script type="text/javascript" src="js/app.js"></script>
+	<script type="text/javascript" src="js/app.js">
+	</script>
 </body>
 </html>
