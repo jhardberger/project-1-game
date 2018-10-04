@@ -11,6 +11,7 @@ canvas {
 #loadingImg {
 	position: fixed;
 	z-index: 1;
+	padding-left: 100px;
 }
 
 div {
@@ -25,7 +26,7 @@ div {
 
 #screen {
 	display: flex;
-	justify-content: center;
+	justify-content: left;
 }
 
 #type-zone {

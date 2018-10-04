@@ -156,7 +156,7 @@ const metaGame = {
 	], 
 
 	mediumChar: [			
-		'angst', 'argon', 'aegis', 'audio', 'byway', 'calif', 'cycle', 'curve', 'coble', 'depth', 'dally', 'equal', 
+		'angst', 'argon', 'audio', 'byway', 'calif', 'cycle', 'curve', 'coble', 'depth', 'dally', 'equal', 'slint',
 		'eccho', 'extra', 'fixed', 'first', 'gyros', 'guard', 'jarre', 'jazzy', 'jonny', 'kinky', 'known', 'laugh', 
 		'leery', 'lingo', 'lemur', 'margo', 'maple', 'maxim', 'mural', 'newly', 'novel', 'plume', 'proto', 'prior', 
 		'quick', 'quiet', 'quiz5', 'queue', 'route', 'riven', 'rough', 'royal', 'seven', 'servo', 'slick', 'sizer', 
@@ -182,7 +182,7 @@ const metaGame = {
 	insaneChar: [			
 		'0zx97', '702d3', 'tyxs7', 'gy8v0', 'hx023', '5axon', 'greif', 'hynox', 'h1nun', '4r2nt', '6t9nn', 'grnro',
 		'mg7s9', '19een', '6cess', 'be4rr', 'evrr8', 'se7en', 'e11vn', 'arst8', 'i11ns', 'i0wah', '99696', 'xl1nt',
-		'slint', 'sippo', 'siqqy', 'ryskk', '59eri', '9eryn', 'bnwyn', '6wyyn', 'uili1', 'unher', 'grexl', 'oogie',
+		'aegis', 'sippo', 'siqqy', 'ryskk', '59eri', '9eryn', 'bnwyn', '6wyyn', 'uili1', 'unher', 'grexl', 'oogie',
 		'zoppq', 'doxys', 'bixl3', '7h7p8', '2rwpx', 'zyzzy', 'ximny', 'werao', 'aeiou', 'laoqs', 'azo0o', 'zoose',
 		'zipty', 'schwt', 'bipfp', '6tyh9', 'alalo', 'alola', 'zgazo', 'ww3w0', 'zp3tz', 'zilch', 'gouro', 'ya1ow' 
 	],
@@ -277,7 +277,7 @@ const baseball = {
 
 	player: new Circle('player', 490, 190, 20, 'red', 0),
 	
-	interceptor: new Circle('interceptor', 460, 195, 10, 'black', 5),
+	interceptor: new Circle('interceptor', 462, 195, 10, 'black', 4),
 
 	enemies: [],
 
@@ -285,7 +285,7 @@ const baseball = {
 		
 		generateEnemy(){
 
-			let speed = Math.floor((Math.random() * 3)+ 2);							//CAN INCREMENT DIFFICULTY HERE
+			let speed = Math.floor((Math.random() * 3)+ 3);						
 			const newEnemy = new Square(1000, 190, 10, 10, 'white', speed); 		//should generate at right edge of screen
 			newEnemy.draw();
 			baseball.enemies.push(newEnemy);
@@ -317,25 +317,26 @@ const baseball = {
 				if (this.counter < 32){												//difficult spike starts here
 																						
 					metaGame.advanceWord(metaGame.easyChar, metaGame.mediumChar);
-					this.interceptor.x = 460;
+					this.interceptor.x = 463;
+
 
 				} if (this.counter > 32) {											//ADJUST THESE THRESHOLDS FOR DIFFICULT
 
 					metaGame.advanceWord(metaGame.mediumChar, metaGame.hardChar);
-					this.interceptor.x = 460;
+					this.interceptor.x = 463;
 
 				} if (this.counter > 64) {
 					
 					metaGame.advanceWord(metaGame.hardChar, metaGame.extraHardChar);
-					this.interceptor.x = 460;
-					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 3);
+					this.interceptor.x = 463;
+					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 5);
 
 
 				} if (this.counter > 96) {
 
 					metaGame.advanceWord(metaGame.extraHardChar, metaGame.insaneChar);
-					this.interceptor.x = 600
-					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 4);
+					this.interceptor.x = 463
+					this.currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 7);
 
 				}
 			}
