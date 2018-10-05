@@ -104,6 +104,7 @@ $reset.on('click', ()=>{
 	clearCanvas();
 
 	baseball.player.hits = 0;
+	baseball.interceptor.hits = 0;
 	baseball.counter = 0;
 	baseball.interceptor.x = 460;
 
