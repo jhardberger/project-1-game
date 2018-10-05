@@ -245,6 +245,7 @@ const metaGame = {
 		$('#display').text(' ');
 		this.makeWord(array1, array2);
 		$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_default.gif')
+
 		gifFrames = [
 			"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
 			"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
@@ -255,7 +256,7 @@ const metaGame = {
 			"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
 			"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
 			"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
-			"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
+			"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif"
 		];
 
 		
@@ -275,9 +276,9 @@ const baseball = {
 /***************************PLAYER INSTANTIATION***********************************/
 
 
-	player: new Circle('player', 490, 190, 20, 'red', 0),
+	player: new Circle('player', 470, 190, 20, 'red', 0),
 	
-	interceptor: new Circle('interceptor', 462, 195, 10, 'black', 4),
+	interceptor: new Circle('interceptor', 443, 195, 10, 'black', 4),
 
 	enemies: [],
 
@@ -309,7 +310,7 @@ const baseball = {
 			this.update();
 			console.log(this.counter);
 			
-			if ((this.counter % 5) === 0 ) {
+			if ((this.counter % 5) === 0 && this.counter !== 0) {
 				
 				this.factory.generateEnemy();
 				this.enemies.splice(0, 1);
@@ -317,25 +318,25 @@ const baseball = {
 				if (this.counter < 32){												//difficult spike starts here
 																						
 					metaGame.advanceWord(metaGame.easyChar, metaGame.mediumChar);
-					this.interceptor.x = 463;
+					this.interceptor.x = 443;
 
 
 				} if (this.counter > 32) {											//ADJUST THESE THRESHOLDS FOR DIFFICULT
 
 					metaGame.advanceWord(metaGame.mediumChar, metaGame.hardChar);
-					this.interceptor.x = 463;
+					this.interceptor.x = 443;
 
 				} if (this.counter > 64) {
 					
 					metaGame.advanceWord(metaGame.hardChar, metaGame.extraHardChar);
-					this.interceptor.x = 463;
+					this.interceptor.x = 443;
 					currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 5);
 
 
 				} if (this.counter > 96) {
 
 					metaGame.advanceWord(metaGame.extraHardChar, metaGame.insaneChar);
-					this.interceptor.x = 463
+					this.interceptor.x = 443;
 					this.currentEnemy[0].speed = Math.floor((Math.random() * 3)+ 7);
 
 				}
@@ -352,8 +353,11 @@ const baseball = {
 	update(){
 		$clock.text(this.counter + 's')
 
+		let hits = this.interceptor.hits;
+		$('#score').text('Hits: ' + hits);
+
 		let strikes = this.player.hits
-		$('#score').text('Strikes: ' + strikes);
+		$('#strikes').text('Strikes: ' + strikes);
 
 		if (strikes > 2) {
 			let score = this.counter;
@@ -412,8 +416,21 @@ function collisionDetection(target){
 				console.log(player.name + ' was hit');
 				// return player.name;
 				player.hits++;
+
+				if (player.name === 'player') {
+
+					$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_strike.gif')
+					gifFrames = [];
+					
+				} if (player.name === 'interceptor') {
+
+					$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_final.gif')
+					gifFrames = [];
+
+				}
 				
 			}
+
 			currentEnemy.status = false;
 			console.log(currentEnemy.status);
 
