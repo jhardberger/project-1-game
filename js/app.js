@@ -78,8 +78,8 @@ class Circle {constructor(name, x, y, r, color, speed){
 
 		ctx.beginPath()
 		ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
-		ctx.fillStyle = this.color;
-		ctx.fill();
+		// ctx.fillStyle = this.color;
+		// ctx.fill();
 	}
 
 };
@@ -108,7 +108,7 @@ $reset.on('click', ()=>{
 	baseball.interceptor.x = 460;
 
 	
-	$clock.text('Xs');
+	$clock.text('Time: 0s');
 	$('#score').text('Strikes: ')
 	$('#passphrase').text('Ready to start? If so type "yes", then hit the ENTER key')
 	$('#display').text(' ')
@@ -221,6 +221,7 @@ const metaGame = {
 		if (baseball.counter === 0) {
 			if (this.key === 'Enter'){
 				$('#display').text(' ')	
+				$('#how-to').hide();
 				baseball.gameOn();			
 			}											
 		}
@@ -309,6 +310,17 @@ const baseball = {
 			this.counter++;
 			this.update();
 			console.log(this.counter);
+
+			if (this.counter === 1) {
+
+				$('#go').show();
+			}
+
+			if (this.counter === 3) {
+
+				$('#go').hide();
+
+			}
 			
 			if ((this.counter % 5) === 0 && this.counter !== 0) {
 				
@@ -351,7 +363,7 @@ const baseball = {
 
 
 	update(){
-		$clock.text(this.counter + 's')
+		$clock.text('Time: ' + this.counter + 's')
 
 		let hits = this.interceptor.hits;
 		$('#score').text('Hits: ' + hits);
@@ -360,10 +372,10 @@ const baseball = {
 		$('#strikes').text('Strikes: ' + strikes);
 
 		if (strikes > 2) {
-			let score = this.counter;
+			let score = this.interceptor.hits;
 		
-			$('#passphrase').text('game over nerd')
-			$('#display').text('You lasted ' + score + ' seconds (and you are still a nerd)')
+			$('#passphrase').text('GAME OVER')
+			$('#display').text('You hit ' + score + ' runs - not bad!')
 			metaGame.baseballScore = score;
 
 			clearInterval(this.intervalID);
@@ -400,6 +412,9 @@ const baseball = {
 ***********************************************************************************/
 
 
+const strike = new Audio('/Users/john/salty-sardines/project-1-game/new_game_images/strike.mp3')
+const nice = new Audio('/Users/john/salty-sardines/project-1-game/new_game_images/nicereal.mp3')
+
 
 function collisionDetection(target){
 
@@ -420,11 +435,13 @@ function collisionDetection(target){
 				if (player.name === 'player') {
 
 					$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_strike.gif')
+					strike.play();
 					gifFrames = [];
 					
 				} if (player.name === 'interceptor') {
 
 					$('#loadingImg').attr('src', '/Users/john/salty-sardines/project-1-game/new_game_images/swing_final.gif')
+					nice.play();
 					gifFrames = [];
 
 				}

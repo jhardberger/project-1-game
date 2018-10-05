@@ -1,16 +1,44 @@
 body {
 	background-color: powderBlue;
+	font-family: 'Press Start 2P', cursive;
+
 }
 
 canvas {
-	border: 1px dotted black;
+/*	border: 1px dotted black;*/
 	position: relative;
 	z-index: -1;
 }
 
-#loadingImg {
+b {
+	color: red;
+}
+
+#go {
+	font-size: 60px;
+	position: fixed;
+	padding-left: 500px; 
+	z-index: 1;
+	color: red;
+}
+
+#title {
+	height: 100px;
+}
+
+#how-to {
+	display: flex;
+	flex-direction: column;
 	position: fixed;
 	z-index: 1;
+	padding-left: 500px;
+	padding-right: 50px;
+
+}
+
+#loadingImg {
+	position: fixed;
+	z-index: 0;
 	padding-left: 100px;
 }
 
