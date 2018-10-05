@@ -109,7 +109,8 @@ $reset.on('click', ()=>{
 
 	
 	$clock.text('Time: 0s');
-	$('#score').text('Strikes: ')
+	$('#strikes').text('Strikes: ')
+	$('#score').text('Hits: ')
 	$('#passphrase').text('Ready to start? If so type "yes", then hit the ENTER key')
 	$('#display').text(' ')
 	console.log('restart')
@@ -164,7 +165,7 @@ const metaGame = {
 	], 
 
 	hardChar: [				
-		'daryl', 'exegy', 'fifth', 'hymen', 'miasm', 'proxy', 'pretz', 'qwert', 'twixt', 'twine', 'helix', 'insta',
+		'daryl', 'exegy', 'fifth', 'sxual', 'miasm', 'proxy', 'pretz', 'qwert', 'twixt', 'twine', 'helix', 'insta',
 		'yarow', 'wyley', 'willw', 'yoman', 'ryley', 'rylye', 'allax', 'axels', 'arxca', 'milyt', 'melty', 'alloy',
 		'lilyl', 'gaxby', 'axemn', 'crowz', 'axewz', 'roxxy', 'kazam', 'glalw', 'druqs', 'di11a', '1asso', 'venox',
 		'12men', '009jb', 'ay420', 'ayy69', '1776b', 'b00st', 'lll1l', 'lmfao', '1mf40', 'ingot', 'minsk', '666b6',
