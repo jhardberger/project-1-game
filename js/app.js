@@ -22,8 +22,8 @@ const ctx = canvas.getContext('2d');
 //ART*******************************************************************************
 
 let gifFrames = [
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
+	url("/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif"),
+	url("/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif"),
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
