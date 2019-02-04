@@ -22,7 +22,7 @@ const gifFrames = [
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
-	"/Users/john/salty-sardines/project-1-ggame/new_game_images/swing10.gif",
+	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
 ];
 
 //CLASSES***************************************************************************
@@ -238,20 +238,20 @@ const metaGame = {
 		
 		$('#display').text(' ');
 		this.makeWord(array1, array2);
-		$('#loadingImg').attr('src', 'https://imgur.com/973tgMm')
+		$('#loadingImg').attr('src', 'https://imgur.com/973tgMm.png')
 
 		gifFrames = [
 
-			'https://imgur.com/9PEjarE',
-			'https://imgur.com/V9yoihz',
-			'https://imgur.com/7sFw49R',
-			'https://imgur.com/n1I450t',
-			'https://imgur.com/tqzaG60',
-			'https://imgur.com/THAFaJq',
-			'https://imgur.com/jvOTqbz',
-			'https://imgur.com/zAs2CoS',
-			'https://imgur.com/zng342B',
-			'https://imgur.com/uIgsUDk'
+			'https://imgur.com/9PEjarE.png',
+			'https://imgur.com/V9yoihz.png',
+			'https://imgur.com/7sFw49R.png',
+			'https://imgur.com/n1I450t.png',
+			'https://imgur.com/tqzaG60.png',
+			'https://imgur.com/THAFaJq.png',
+			'https://imgur.com/jvOTqbz.png',
+			'https://imgur.com/zAs2CoS.png',
+			'https://imgur.com/zng342B.png',
+			'https://imgur.com/uIgsUDk.png'
 
 		];
 
