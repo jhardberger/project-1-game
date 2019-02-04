@@ -2,7 +2,7 @@ body {
 	background-color: powderBlue;
 	font-family: 'Press Start 2P', cursive;
 	display: flex;
-	flex-direction: column;
+	flex-flow: column wrap;
 }
 
 canvas {
@@ -12,11 +12,6 @@ canvas {
 
 b {
 	color: red;
-}
-
-#header {
-	display: flex;
-	flex-direction: column;
 }
 
 #go {
@@ -60,6 +55,7 @@ div {
 #screen {
 	display: flex;
 	justify-content: left;
+	flex-direction: row;
 }
 
 #type-zone {
