@@ -64,10 +64,9 @@ div {
 
 #type-zone {
 	display: flex;
-	width: 100%;
 	flex-direction: column;
-	align-items: center;
-	position: fixed;
+	align-items: flex-end;
+	position: relative;
 	z-index: 1;
 }
 
