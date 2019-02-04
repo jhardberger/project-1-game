@@ -2,7 +2,7 @@ body {
 	background-color: powderBlue;
 	font-family: 'Press Start 2P', cursive;
 	display: flex;
-	flex-flow: column wrap;
+	flex-direction: column;
 }
 
 canvas {
@@ -12,6 +12,11 @@ canvas {
 
 b {
 	color: red;
+}
+
+#header {
+	display: flex;
+	flex-direction: column;
 }
 
 #go {
@@ -27,9 +32,8 @@ b {
 }
 
 #how-to {
-	display: flex;
-	flex-direction: column;
-	position: fixed;
+	height: 600px;
+	width: 300px
 	z-index: 1;
 	padding-left: 500px;
 	padding-right: 50px;
