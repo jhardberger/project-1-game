@@ -1,11 +1,11 @@
 body {
 	background-color: powderBlue;
 	font-family: 'Press Start 2P', cursive;
-	display: flex;
-	flex-direction: column;
+
 }
 
 canvas {
+/*	border: 1px dotted black;*/
 	position: relative;
 	z-index: -1;
 }
