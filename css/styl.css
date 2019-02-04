@@ -65,8 +65,8 @@ div {
 #type-zone {
 	display: flex;
 	flex-direction: column;
-	justify-content: right;
-	align-items: center;
+	justify-content: center;
+	align-items: flex-end;
 	position: fixed;
 	z-index: 1;
 }
