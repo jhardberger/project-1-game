@@ -383,7 +383,7 @@ const baseball = {
 			let score = this.interceptor.hits;
 		
 			$('#passphrase').text('GAME OVER')
-			$('#display').text('You hit ' + score + ' runs - not bad!')
+			$('#display').text('You scored ' + score + ' runs - not bad!')
 			metaGame.baseballScore = score;
 
 			clearInterval(this.intervalID);
