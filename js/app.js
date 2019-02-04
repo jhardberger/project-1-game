@@ -13,17 +13,32 @@ const ctx = canvas.getContext('2d');
 //ART*******************************************************************************
 
 const gifFrames = [
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing6.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
+
+	'https://i.imgur.com/9PEjarE.gif',
+	'https://i.imgur.com/V9yoihz.gif',
+	'https://i.imgur.com/7sFw49R.gif',
+	'https://i.imgur.com/n1I450t.gif',
+	'https://i.imgur.com/tqzaG60.gif',
+	'https://i.imgur.com/THAFaJq.gif',
+	'https://i.imgur.com/jvOTqbz.gif',
+	'https://i.imgur.com/zAs2CoS.gif',
+	'https://i.imgur.com/zng342B.gif',
+	'https://i.imgur.com/uIgsUDk.gif'
+
 ];
+
+// gifFrames = [
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing6.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
+// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
+// ];
 
 //CLASSES***************************************************************************
 
@@ -239,21 +254,6 @@ const metaGame = {
 		$('#display').text(' ');
 		this.makeWord(array1, array2);
 		$('#loadingImg').attr('src', 'https://imgur.com/973tgMm.png')
-
-		gifFrames = [
-
-			'https://i.imgur.com/9PEjarE.gif',
-			'https://i.imgur.com/V9yoihz.gif',
-			'https://i.imgur.com/7sFw49R.gif',
-			'https://i.imgur.com/n1I450t.gif',
-			'https://i.imgur.com/tqzaG60.gif',
-			'https://i.imgur.com/THAFaJq.gif',
-			'https://i.imgur.com/jvOTqbz.gif',
-			'https://i.imgur.com/zAs2CoS.gif',
-			'https://i.imgur.com/zng342B.gif',
-			'https://i.imgur.com/uIgsUDk.gif'
-
-		];
 
 		
 	}
