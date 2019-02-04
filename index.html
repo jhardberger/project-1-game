@@ -17,21 +17,23 @@
 		</div>
 	</div>
 	<br>
-	<div id="screen">
-		<canvas id="my-canvas" width="1000" height="400"></canvas>
-		<img src="https://i.imgur.com/2DZzGuL.gif" id='loadingImg' />		
-		<div id="how-to">
-			<p>Ah, baseball - America's passtime. After years of extensive research, I'm excited to announce a discovery regarding our country's favorite sport: the only thing - literally, the only thing! - that can possibly make it more exciting and/or accessible to the masses is a typing component.</p> 
-			<p>To that end, I've developed <b>QWERTY DERBY</b>, a baseball game you can <b>PLAY BY TYPING</b> on your <b>COMPUTER</b>. Just type along with the phrases and you'll knock 'em out the park like that guy, ol' what's his name, you know, your favorite baseballer.</p> 
-			<p><b>BUT WATCH OUT</b>: just like in real baseball, it's <b>THREE STRIKES YOU'RE OUT</b>. Sorry - I tried to change that, they wouldn't let me. The baseball people, I mean. You know how they are.</p>
+	<div id='game'>
+		<div id="screen">
+			<canvas id="my-canvas" width="1000" height="400"></canvas>
+			<img src="https://i.imgur.com/2DZzGuL.gif" id='loadingImg' />		
+			<div id="how-to">
+				<p>Ah, baseball - America's passtime. After years of extensive research, I'm excited to announce a discovery regarding our country's favorite sport: the only thing - literally, the only thing! - that can possibly make it more exciting and/or accessible to the masses is a typing component.</p> 
+				<p>To that end, I've developed <b>QWERTY DERBY</b>, a baseball game you can <b>PLAY BY TYPING</b> on your <b>COMPUTER</b>. Just type along with the phrases and you'll knock 'em out the park like that guy, ol' what's his name, you know, your favorite baseballer.</p> 
+				<p><b>BUT WATCH OUT</b>: just like in real baseball, it's <b>THREE STRIKES YOU'RE OUT</b>. Sorry - I tried to change that, they wouldn't let me. The baseball people, I mean. You know how they are.</p>
+			</div>
+			<p id="go" hidden>PLAY BALL!</p>
 		</div>
-		<p id="go" hidden>PLAY BALL!</p>
-	</div>
-	<br>
-	<div id="type-zone">
-		<h2 id ="passphrase">Ready to start? If so type "yes", then hit the ENTER key</h2>
 		<br>
-		<h2 id="display"></h2>
+		<div id="type-zone">
+			<h2 id ="passphrase">Ready to start? If so type "yes", then hit the ENTER key</h2>
+			<br>
+			<h2 id="display"></h2>
+		</div>
 	</div>
 	<script
 	  src="https://code.jquery.com/jquery-2.2.4.min.js"
