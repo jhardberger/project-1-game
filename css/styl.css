@@ -14,6 +14,11 @@ b {
 	color: red;
 }
 
+#header {
+	display: flex;
+	flex-direction: column;
+}
+
 #go {
 	font-size: 60px;
 	position: fixed;
@@ -31,7 +36,6 @@ b {
 	flex-direction: column;
 	position: fixed;
 	z-index: 1;
-	padding-left: 500px;
 	padding-right: 50px;
 
 }
