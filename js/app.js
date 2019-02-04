@@ -22,7 +22,7 @@ const gifFrames = [
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
-	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
+	"/Users/john/salty-sardines/project-1-ggame/new_game_images/swing10.gif",
 ];
 
 //CLASSES***************************************************************************
