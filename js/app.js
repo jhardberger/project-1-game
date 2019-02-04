@@ -242,16 +242,16 @@ const metaGame = {
 
 		gifFrames = [
 
-			'https://imgur.com/9PEjarE.png',
-			'https://imgur.com/V9yoihz.png',
-			'https://imgur.com/7sFw49R.png',
-			'https://imgur.com/n1I450t.png',
-			'https://imgur.com/tqzaG60.png',
-			'https://imgur.com/THAFaJq.png',
-			'https://imgur.com/jvOTqbz.png',
-			'https://imgur.com/zAs2CoS.png',
-			'https://imgur.com/zng342B.png',
-			'https://imgur.com/uIgsUDk.png'
+			'https://imgur.com/9PEjarE.gif',
+			'https://imgur.com/V9yoihz.gif',
+			'https://imgur.com/7sFw49R.gif',
+			'https://imgur.com/n1I450t.gif',
+			'https://imgur.com/tqzaG60.gif',
+			'https://imgur.com/THAFaJq.gif',
+			'https://imgur.com/jvOTqbz.gif',
+			'https://imgur.com/zAs2CoS.gif',
+			'https://imgur.com/zng342B.gif',
+			'https://imgur.com/uIgsUDk.gif'
 
 		];
 
