@@ -60,6 +60,8 @@ div {
 #screen {
 	display: flex;
 	justify-content: left;
+	position: relative;
+	z-index: 1;
 }
 
 #type-zone {
