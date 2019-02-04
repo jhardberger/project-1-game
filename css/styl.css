@@ -36,6 +36,7 @@ b {
 	flex-direction: column;
 	position: fixed;
 	z-index: 1;
+	padding-left: 500px;
 	padding-right: 50px;
 
 }
