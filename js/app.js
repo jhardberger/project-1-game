@@ -1,7 +1,11 @@
 /***********************************************************************************
-
+						GAME ZONE
+UPDATE 10/3: 
+-we have a really nice, intuitive MVP (I think) of game1
+-we have an improved architecture, which seperates out universal functions
+into a "metagame" object, which could, with the mini games, later be encompassed
+in like some kind of super-object if desired (we'll see)
 					CLASSES & CONSTS
-
 ***********************************************************************************/
 
 
@@ -13,7 +17,6 @@ const ctx = canvas.getContext('2d');
 //ART*******************************************************************************
 
 let gifFrames = [
-
 	'https://i.imgur.com/9PEjarE.gif',
 	'https://i.imgur.com/V9yoihz.gif',
 	'https://i.imgur.com/7sFw49R.gif',
@@ -24,21 +27,7 @@ let gifFrames = [
 	'https://i.imgur.com/zAs2CoS.gif',
 	'https://i.imgur.com/zng342B.gif',
 	'https://i.imgur.com/uIgsUDk.gif'
-
 ];
-
-// gifFrames = [
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing1.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing2.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing3.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing4.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing5.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing6.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing7.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing8.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing9.gif",
-// 	"/Users/john/salty-sardines/project-1-game/new_game_images/swing10.gif",
-// ];
 
 //CLASSES***************************************************************************
 
@@ -97,7 +86,7 @@ class Circle {constructor(name, x, y, r, color, speed){
 ***********************************************************************************/
 
 const $start = $('#start');
-const $reset = $('#reset'); 														
+const $reset = $('#reset'); 														//<-- multiple buttons for the different games?
 const $clock = $('#clock'); 
 
 
@@ -256,7 +245,6 @@ const metaGame = {
 		$('#loadingImg').attr('src', 'https://imgur.com/973tgMm.png')
 
 		gifFrames = [
-
 			'https://i.imgur.com/9PEjarE.gif',
 			'https://i.imgur.com/V9yoihz.gif',
 			'https://i.imgur.com/7sFw49R.gif',
@@ -267,8 +255,9 @@ const metaGame = {
 			'https://i.imgur.com/zAs2CoS.gif',
 			'https://i.imgur.com/zng342B.gif',
 			'https://i.imgur.com/uIgsUDk.gif'
-
 		];
+
+		
 	}
 
 };
@@ -383,7 +372,7 @@ const baseball = {
 			let score = this.interceptor.hits;
 		
 			$('#passphrase').text('GAME OVER')
-			$('#display').text('You scored ' + score + ' runs - not bad!')
+			$('#display').text('You hit ' + score + ' runs - not bad!')
 			metaGame.baseballScore = score;
 
 			clearInterval(this.intervalID);
@@ -487,5 +476,4 @@ function animate(){
 	window.requestAnimationFrame(animate);
 };
 
-animate();		
-
+animate();
