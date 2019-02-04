@@ -12,7 +12,7 @@ const ctx = canvas.getContext('2d');
 
 //ART*******************************************************************************
 
-const gifFrames = [
+let gifFrames = [
 
 	'https://i.imgur.com/9PEjarE.gif',
 	'https://i.imgur.com/V9yoihz.gif',
