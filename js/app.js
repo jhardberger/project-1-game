@@ -431,38 +431,13 @@ function collisionDetection(target){
 
 					$('#loadingImg').attr('src', 'https://i.imgur.com/J6czmV6.gif')
 					strike.play();
-					gifFrames = [
-
-						'https://i.imgur.com/9PEjarE.gif',
-						'https://i.imgur.com/V9yoihz.gif',
-						'https://i.imgur.com/7sFw49R.gif',
-						'https://i.imgur.com/n1I450t.gif',
-						'https://i.imgur.com/tqzaG60.gif',
-						'https://i.imgur.com/THAFaJq.gif',
-						'https://i.imgur.com/jvOTqbz.gif',
-						'https://i.imgur.com/zAs2CoS.gif',
-						'https://i.imgur.com/zng342B.gif',
-						'https://i.imgur.com/uIgsUDk.gif'
-
-					];
+					gifFrames = [];
 					
 				} if (player.name === 'interceptor') {
 
 					$('#loadingImg').attr('src', 'https://i.imgur.com/frqhjRo.gif')
-					gifFrames = [
-
-						'https://i.imgur.com/9PEjarE.gif',
-						'https://i.imgur.com/V9yoihz.gif',
-						'https://i.imgur.com/7sFw49R.gif',
-						'https://i.imgur.com/n1I450t.gif',
-						'https://i.imgur.com/tqzaG60.gif',
-						'https://i.imgur.com/THAFaJq.gif',
-						'https://i.imgur.com/jvOTqbz.gif',
-						'https://i.imgur.com/zAs2CoS.gif',
-						'https://i.imgur.com/zng342B.gif',
-						'https://i.imgur.com/uIgsUDk.gif'
-
-					];
+					nice.play();
+					gifFrames = [];
 
 				}
 				
