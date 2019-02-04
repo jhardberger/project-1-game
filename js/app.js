@@ -242,16 +242,16 @@ const metaGame = {
 
 		gifFrames = [
 
-			'https://imgur.com/9PEjarE.gif',
-			'https://imgur.com/V9yoihz.gif',
-			'https://imgur.com/7sFw49R.gif',
-			'https://imgur.com/n1I450t.gif',
-			'https://imgur.com/tqzaG60.gif',
-			'https://imgur.com/THAFaJq.gif',
-			'https://imgur.com/jvOTqbz.gif',
-			'https://imgur.com/zAs2CoS.gif',
-			'https://imgur.com/zng342B.gif',
-			'https://imgur.com/uIgsUDk.gif'
+			'https://i.imgur.com/9PEjarE.gif',
+			'https://i.imgur.com/V9yoihz.gif',
+			'https://i.imgur.com/7sFw49R.gif',
+			'https://i.imgur.com/n1I450t.gif',
+			'https://i.imgur.com/tqzaG60.gif',
+			'https://i.imgur.com/THAFaJq.gif',
+			'https://i.imgur.com/jvOTqbz.gif',
+			'https://i.imgur.com/zAs2CoS.gif',
+			'https://i.imgur.com/zng342B.gif',
+			'https://i.imgur.com/uIgsUDk.gif'
 
 		];
 
@@ -429,13 +429,13 @@ function collisionDetection(target){
 
 				if (player.name === 'player') {
 
-					$('#loadingImg').attr('src', 'https://imgur.com/J6czmV6')
+					$('#loadingImg').attr('src', 'https://i.imgur.com/J6czmV6.gifv')
 					strike.play();
 					gifFrames = [];
 					
 				} if (player.name === 'interceptor') {
 
-					$('#loadingImg').attr('src', 'https://imgur.com/frqhjRo')
+					$('#loadingImg').attr('src', 'https://i.imgur.com/frqhjRo.gifv')
 					nice.play();
 					gifFrames = [];
 
