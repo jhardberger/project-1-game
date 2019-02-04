@@ -255,7 +255,7 @@ const metaGame = {
 		this.makeWord(array1, array2);
 		$('#loadingImg').attr('src', 'https://imgur.com/973tgMm.png')
 
-		let gifFrames = [
+		gifFrames = [
 
 			'https://i.imgur.com/9PEjarE.gif',
 			'https://i.imgur.com/V9yoihz.gif',
