@@ -1,6 +1,6 @@
-#QWERTY DERBY
+#QWERTY DERBY#
 
-##A typing game that's... actually kind of hard?
+##A typing game that's... actually kind of hard?##
 
 This is a typing game in which users harness their QWERTY skills to smack sweet home runs like [inset name of favorite baseball player here, I don't want to fight about it]!
 
